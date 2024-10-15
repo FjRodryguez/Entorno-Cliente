@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba 3</title>
+</head>
+<body>
+    <script>
+        x = 5;
+        y = 10;
+        
+        //Función anónima
+        z = (function (x,y) { return x + y} (1, 2));
+        document.write(z);
+
+        //Cosa random
+        document.write("<br>" + eval(x + y));
+
+        //Función anónima autoinvocada
+        var cadena1 = "<br>Hola";
+        var cadena2 = " y adios";
+        (function (str1, str2) { document.write(str1 + str2);}) (cadena1, cadena2);
+
+        //Prática
+        a = 3;
+        b = 9;
+        c = 7;
+
+        //Función normal
+        function valorMayor(a, b, c){
+            return Math.max(a, b, c);
+        }
+        document.write("<br>El número mayor es: " + valorMayor(a,b,c));
+        
+        //Función anónima
+        let f = function (a, b, c){
+            return Math.max(a, b, c);
+        }
+        document.write("<br>El número mayor es: " + f(a,b,c));
+
+        //Función anónima autoinvocada
+        (function (a, b, c) { document.write("<br>El mayor es: " + Math.max(a,b,c))}) (a,b,c); 
+
+        //Práctica 2
+        //Función basica anónima
+        let basica = function (a, b){
+            return a + b;
+        }
+
+        //Función basica autoincocada
+        let basica2 = (function (a, b){
+            return a + b;
+        }) (6, 9);
+
+        //Función compleja de manera normal
+        function compleja (f){
+            return f / 2;
+        }
+
+        //Llamada a función compleja pasándole como parámetro la función básica
+        document.write("<br>"+compleja(basica(3,4)));
+        document.write("<br>"+compleja(basica2));
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <script>
+        function cambiarValores(v1, v2, v3){
+            v1 = 10;
+            v2 = "hola";
+            v3 = true;
+            document.write("Valores dentro de la función: " + v1 + " " + v2 + " " + v3);
+        }
+        v1 = 2;
+        v2 = "adios";
+        v3 = false;
+        document.write("Valores iniciales: " + v1 + " " + v2 + " " + v3);
+        document.write("<br>")
+        cambiarValores(v1, v2, v3);
+        document.write("<br>")
+        document.write("Valores finales: " + v1 + " " + v2 + " " + v3);
+        document.write("<br>" + cambiarValores);
+        document.write("<br>")
+
+        a = cambiarValores;
+        cambiarValores(v1, v2, v3);
+    </script>
+</body>
+</html>

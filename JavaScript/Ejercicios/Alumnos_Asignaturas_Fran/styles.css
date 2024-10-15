@@ -1,0 +1,28 @@
+table, tr, th, td{
+    margin: auto;
+}
+tr, th, td{
+    border: 1px solid black;
+}
+table{
+    margin-top: 20px;
+    width: 80%;
+}
+tr, th, td{
+    padding: 20px;
+}
+#cabecera{
+    background-color: rgb(23, 218, 16);
+}
+.par{
+    background-color: gray;
+}
+.negro{
+    color: black;
+}
+.amarillo{
+    color: rgb(199, 199, 36);
+}
+.rojo{
+    color: red;
+}

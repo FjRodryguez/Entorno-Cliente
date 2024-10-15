@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <style>
+        table, tr, th, td{
+            margin: auto;
+            border: 1px solid black;
+        }
+        table{
+            width: 80%;
+        }
+        tr, th, td{
+            padding: 20px;
+        }
+        .negro{
+            background-color: black;
+        }
+        .azul{
+            background-color: blue;
+        }
+        .amarillo{
+            background-color: yellow;
+        }
+        .verde{
+            background-color: rgb(15, 218, 15);
+        }
+        .rojo{
+            background-color: red;
+        }
+    </style>
+</head> 
+<body>
+    <table>
+        <caption align="bottom">Título tabla</caption>
+        <tr>
+            <th colspan="3">Mi tabla</th>
+        </tr>
+        <tr>
+            <th>Cab 1</th>
+            <th>Cab 2</th>
+            <th>Cab 3</th>
+        </tr>
+        <tr>
+            <td class="rojo">&nbsp;</td>
+            <td rowspan="2" colspan="2" class="azul">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="negro">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="amarillo">&nbsp;</td>
+            <td rowspan="2" class="verde">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="negro">&nbsp;</td>
+            <td class="negro">&nbsp;</td>
+        </tr>
+    </table>
+</body>
+</html>

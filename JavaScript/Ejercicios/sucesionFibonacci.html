@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucesión de Fibonacci</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="limite">Límite</label>
+        <input type="number" id="limite" name="limite" min="1">
+        <input type="button" onclick="mostrarSucesion()" value="Crear sucesión">
+        <label for="numero">Factorial</label>
+        <input type="number" id="numero" name="numero" min="1">
+        <input type="button" onclick="mostrarFactorial()" value="Hacer factorial">
+    </form>
+    <h2>Secuencia</h2>
+    <p id="salida"></p>
+    <h2>Factorial</h2>
+    <p id="factorial"></p>
+</body>
+
+<script>
+    const limite = parseInt(document.getElementById("limite").value);
+    const numero = parseInt(document.getElementById("numero").value)
+    const salida = document.getElementById("salida");
+    const resultadoFactorial = document.getElementById("facotrial");
+    function crearSucesion() {
+        let lista = document.getElementById("salida");
+        let a = 0;
+        let b = 1;
+        let siguiente;
+        let resultado = a;
+
+        if (limite > 1) {
+            resultado += ", " + b;
+        }
+
+        for (let index = 2; index < limite; index++) {
+            siguiente = a + b;
+            resultado += ", " + siguiente;
+            a = b;
+            b = siguiente;
+        }
+
+        document.getElementById("salida").innerText = resultado;
+    }
+
+    function crearSucesionRecursiva(a) {
+        if (a <= 1) {
+            return a;
+        }else{
+            return crearSucesionRecursiva(a - 1) + crearSucesionRecursiva(a - 2);
+        }
+    }
+    
+    function mostrarSucesion() {
+        salida.innerHTML = "";
+        let resultado = 0;
+        resultado += crearSucesionRecursiva(limite);
+        salida.innerText += resultado;
+    }
+
+    function factorialRecursivo(a){
+        if(a <= 1){
+            return 1;
+        }else{
+            return a * factorialRecursivo(a-1);
+        }
+    }
+
+    function mostrarFactorial(){
+        resultadoFactorial.innerHTML = "";
+        let resultado = 0;
+        resultado += factorialRecursivo(numero);
+        resultadoFactorial.innerText += resultado;
+    }
+</script>
+
+</html>

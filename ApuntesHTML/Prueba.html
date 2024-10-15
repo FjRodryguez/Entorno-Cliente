@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba 1</title>
+    <style>
+        table,
+        caption,
+        td,
+        th,
+        tr {
+            border: 1px solid black;
+        }
+
+        .bloque {
+            background-color: black;
+            color: white;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .grande {
+            font-size: 36px;
+        }
+
+        #parrafo1 {
+            background-color: lightblue;
+            color: black;
+            padding: 40px;
+            text-align: left;
+        }
+
+        .estilo1 {
+            background-color: tomato;
+            color: white;
+            padding: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        header {
+            background-color: #666;
+            padding: 30px;
+            text-align: center;
+            font-size: 35px;
+            color: white;
+        }
+
+        nav {
+            float: left;
+            width: 30%;
+            height: 300px;
+            background: #ccc;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        article {
+            float: left;
+            padding: 20px;
+            width: 70%;
+            background-color: #f1f1f1;
+            height: 300px;
+        }
+
+        section::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        footer {
+            background-color: #777;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        input{
+            margin-bottom: 5px;
+        }
+        fieldset{
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Cabecera 1</h1>
+    <h2>Cabecera 2</h2>
+    <h3>Cabecera 3</h3>
+    <h4>Cabecera 4</h4>
+    <h5>Cabecera 5</h5>
+    <h6>Cabecera 6</h6>
+
+    <p>Esto es un parrafo</p>
+    <p>Esto
+        es
+        otro parrafo</p>
+
+    <pre>
+        Esto es 
+        un parrafo
+        preformateado
+    </pre>
+
+    <!-- h3{lista ordenada}+ol>li*3{elemento $}^h3{lista desorndenada}+ul>li*3{elemento $} -->
+    <h3>Lista desordenada</h3>
+
+    <ul>
+        <li><strong>Elemento</strong> <sub>1</sub></li>
+        <li><em>Elemento</em> <sub>2</sub></li>
+        <li><mark>Elemento</mark> <sub>3</sub></li>
+    </ul>
+
+    <h3>Lista ordenada</h3>
+
+    <ul>
+        <li><small>Elemento</small> <sup>1</sup></li>
+        <li><del>Elemento</del> <sup>2</sup></li>
+        <li><ins>Elemento</ins> <sup>3</sup></li>
+    </ul>
+
+    <br>
+
+    <dl>
+        <dt>dia</dt>
+        <dd>- sale el sol</dd>
+        <dt>noche</dt>
+        <dd>- no sale el sol</dd>
+    </dl>
+
+    <q>Lorem ipsum dolor sit amet.</q>
+    <hr>
+    <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum odio iure in sit architecto dolorem sed
+        vitae ut nihil voluptatibus? Ut perspiciatis ad qui, molestiae cumque quibusdam aliquam saepe facere veritatis.
+        Officia molestiae repellat minus voluptate ipsam non odit facilis et odio dolorem mollitia reprehenderit dolore
+        quos atque, deleniti saepe.</blockquote>
+
+    <table>
+        <caption>Tabla personas</caption>
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+        </tr>
+        <tr>
+            <td>Pepe</td>
+            <td>26</td>
+        </tr>
+        <tr>
+            <td>Ana</td>
+            <td>41</td>
+        </tr>
+    </table>
+
+    <div>
+        <p>Lorem <span style="color: red;">ipsum dolor</span> sit amet consectetur, adipisicing elit. Incidunt sint
+            aliquid similique assumenda sit deleniti aliquam tenetur mollitia exercitationem, et reprehenderit cum
+            tempora veniam architecto. Sint minus impedit nulla nostrum?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, consectetur.</p>
+    </div>
+
+    <div class="bloque">
+        <p class="grande">Londres</p>
+        <p>Londres es la capital de Inglaterra</p>
+    </div>
+
+    <div class="bloque">
+        <p class="grande">Paris</p>
+        <p>Paris es la <span class="grande">capital</span> de Francia</p>
+    </div>
+
+    <div>
+        <pre id="parrafo1">
+Este parrafo tiene el id:
+parrafo1 y ningún otro elemento
+podra usar este ide
+        </pre>
+        <pre class="estilo1">
+Este parrafo pertenece a la clase estilo1,
+la cual puede ser usado por otros
+        </pre>
+        <p class="estilo1">Este otro parrafo utiliza también la clase estilo1</p>
+    </div>
+
+    <p><a href="#">Inicio</a></p>
+
+    <header>
+        <p>Ciudades</p>
+    </header>
+
+    <section>
+        <nav>
+            <ul>
+                <li><a href="#">Londres</a></li>
+                <li><a href="#">Paris</a></li>
+            </ul>
+        </nav>
+
+        <article>
+            <p>Londres</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus numquam, autem nesciunt
+                temporibus sunt odio. Enim quasi inventore mollitia dolorum ea, minus minima, adipisci ab dicta delectus
+                ad animi.</p>
+        </article>
+    </section>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+    <form action="proc_form.php" method="post" target="_blank" enctype="multipart/form-data">
+
+        <fieldset style="width: 520px;">
+            <legend>Datos personales</legend>
+            <label for="nombre_text">Nombre: </label>
+            <input type="text" id="nombre_text" placeholder="introduce tu nombre">
+            <label for="edad_number">Edad: </label>
+            <input type="numbre" id="edad_number" min="0">
+            <label for="email">Email: </label>
+            <input type="email" id="email">
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd">
+        </fieldset>
+        <br>
+        <br>
+        <fieldset style="width: 115px;">
+            <legend>Genero</legend>
+            <input type="radio" name="genero" id="hombre" value="hombre">
+            <label for="hombre">Hombre</label>
+            <br>
+            <br>
+            <input type="radio" name="genero" id="mujer" value="mujer">
+            <label for="mujer">Mujer</label>
+        </fieldset>
+        <br>
+        <br>
+        <fieldset style="width: 300px;">
+            <legend>Interess</legend>
+            <input type="checkbox" id="lectura" value="Lectura">
+            <label for="lectura">Lectura</label>
+            <input type="checkbox" id="cine" value="cine">
+            <label for="cine">Cine</label>
+            <input type="checkbox" id="deporte" value="Deporte">
+            <label for="deporte">Deporte</label>
+        </fieldset>
+        <br>
+        <br>
+        <label for="coches">Selecciona un coche:</label>
+        <br>
+        <select id="coches" name="coches" size="3" multiple>
+            <option value="seat">Seat</option>
+            <option value="kia">Kia</option>
+            <option value="fiat">Fiat</option>
+            <option value="toyota">Toyota</option>
+            <option value="mazda">Mazda</option>
+        </select>
+        <textarea name="descripcion_coche" rows="3" cols="20" placeholder="describe tu coche"></textarea>
+        <br>
+        <br>
+        <label for="navegadores">Selecciona un navegador:</label><br />
+        <input list="navegadores">
+        <datalist id="navegadores">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Edge">
+            </option>
+        </datalist>
+        <br>
+        <br>
+        <label for="fecha">Cumplea&ntilde;os</label>
+        <input type="date" id="fecha">
+        <button type="button" onclick="alert('Hola')">Hola</button>
+        <input type="button" onclick="alert('Adi&oacute;s')" value="Adi&oacute;s">
+        <br>
+        <br>
+        <label for="color">Selecciona un color:</label>
+        <input type="color" id="color">
+        <br>
+        <br>
+        <label for="archivo">Seleccionar archivo:</label>
+        <input type="file" id="archivo">
+        <br>
+        <br>
+        <input type="submit" value="Enviar datos">
+        <input type="reset" value="Borrar datos">
+    </form>
+
+</body>
+
+</html>

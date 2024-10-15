@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Mezcla Listas</title>
+</head>
+
+<body>
+    <label for="firstList">Primera lista:</label> </br>
+    <input type="text" name="firstList" id="firstList">
+    <select name="rangeFirstList" id="rangeFirstList">
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+    </select> </br>
+    <label for="secondList">Segunda lista:</label> </br>
+    <input type="text" name="secondList" id="secondList">
+    <select name="rangeSecondList" id="rangeSecondList">
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    <p id="mixDone"></p>
+    <button onclick="mix()">Mezclar</button>
+    <button onclick="reset()">Reiniciar</button>
+    <script>
+        // Función que mezcla los los valores de 2 arrays intercalándolos.
+        function mix() {
+            // Cogemos los arrays dados por pantalla
+            let list1 = document.getElementById("firstList").value.split(",");
+            let list2 = document.getElementById("secondList").value.split(",");
+            // Calculamos los tamaños de los arrays para el control
+            let rangeList1 = document.getElementById("rangeFirstList").value;
+            let rangeList2 = document.getElementById("rangeSecondList").value;
+
+            if (list1.length == rangeList1 && list2.length == rangeList2) {
+                // Array final en el que mezclamos ambas listas
+                let finalList = [];
+                // Contadores
+                let count1 = 0;
+                let count2 = 0;
+                let countFinal = 0;
+                // Booleano para incrementar contadores
+                let change = true;
+                while (count1 + count2 != list1.length + list2.length) {
+                    // Mezclamos en función de los contadores
+                    if (count1 == count2) {
+                        finalList.splice(countFinal, 0, list1[count1]);
+                    } else if (count1 == count2 + 1 && count2 < list2.length) {
+                        finalList.splice(countFinal, 0, list2[count2]);                        
+                    } else {                        
+                        finalList.splice(countFinal, 0, list1[count1]);
+                    }
+                    // Incremento de los contadores
+                    if (count1 < list1.length && change) {
+                        count1 += 1;
+                        if (count2 < list2.length) {
+                            change = false;
+                        }
+                    } else if (count2 < list2.length && !change) {
+                        count2 += 1;
+                        change = true;
+                    }
+                    countFinal += 1;
+                }
+                // Rellenamos el <p> antes creado con el array final
+                document.getElementById("mixDone").innerHTML = finalList;
+            } else {
+                // Controlamos que los tamaños de los arrays sean correctos
+                if (list1.length != rangeList1) {
+                    alert("Error de tamaño en la PRIMERA lista.");
+                } else {
+                    alert("Error de tamaño en la SEGUNDA lista.");
+                }
+            }
+        }
+
+        // Función que vacía los inputs y el resultado.
+        function reset() {
+            document.getElementById("firstList").value = "";
+            document.getElementById("secondList").value = "";
+            document.getElementById("mixDone").innerHTML = "";
+        }
+    </script>
+</body>
+
+</html>

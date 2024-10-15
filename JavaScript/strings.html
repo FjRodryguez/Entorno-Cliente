@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strings</title>
+</head>
+<body>
+    <script>
+        var txt = "Esto es una prueba de métodos de cadena";
+        document.write("Longitud de txt: ");
+        document.write(txt.length);
+
+        document.write("<br>" + "Posición de la cadena \"d\": ");
+        document.write(txt.indexOf("de"));
+
+        document.write("<br>" + "Extracción de texto entre pos 5 y 9: ");
+        document.write(txt.slice(5,9));
+
+        document.write("<br>" + "Reemplazo de 'cadena' por 'string': ");
+        document.write(txt.replace("cadena", "string"));
+
+        document.write("<br>" + "Carácter en posición 8: ");
+        document.write(txt.charAt(8));
+        document.write("<br>" + "Código UNICODE en posición 8: ");
+        document.write(txt.charCodeAt(8));
+
+        document.write("<br>" + "Convertir txt en un vector usando el espacio como separador");
+        var v = txt.split(" ");
+        document.write("<br>" + "Elemento 3: " + v[3]);
+    </script>
+</body>
+</html>

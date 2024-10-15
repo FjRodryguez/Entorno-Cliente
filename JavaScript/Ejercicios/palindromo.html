@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindromo</title>
+</head>
+
+<body>
+    <h1>Es palindromo?</h1>
+    <form action="">
+        <label for="Introduce una frase o palabra"></label>
+        <input type="text" name="palabra" id="palabra">
+        <input type="button" value="Es palindromo?" onclick="comprobarPalindromo()">
+    </form>
+
+    <h3 id="resultado"></h3>
+    <script>
+        function comprobarPalindromo() {
+            let palabra = document.getElementById('palabra').value.toLowerCase();
+            
+            let palabraDividida = palabra.split("");
+            let palindromoDividido = palabraDividida.reverse();
+            let palindromo = palindromoDividido.join('');
+            
+            if(palabra === palindromo){
+                document.getElementById('resultado').innerText = "Es palindromo";
+            }else{
+                document.getElementById('resultado').innerText = "No es palindromo";
+            }
+        }
+    </script>
+</body>
+
+</html>

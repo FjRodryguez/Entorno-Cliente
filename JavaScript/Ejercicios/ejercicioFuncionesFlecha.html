@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de funciones flecha</title>
+</head>
+
+<body>
+    <!-- Formulario para el elemento 1 -->
+    <form action="">
+        <fieldset>
+            <h3>Elemento 1</h3>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" name="cantidad" id="cantidad1" min="1">
+            <label for="precioUnidad">Precio unidad</label>
+            <input type="number" name="precioUnidad" id="precioUnidad1" min="1">
+            <label for="porcentaje">Porcentaje</label>
+            <select name="porcentaje" id="porcentaje1">
+                <option value="6">6%</option>
+                <option value="12">12%</option>
+                <option value="18">18%</option>
+            </select>
+            <input type="button" value="Calcular" onclick="mostrarPrecio1()">
+            <input type="button" value="Reset" onclick="reset1()">
+        </fieldset>
+    </form>
+    <p id="precioElemento1"></p>
+
+    <!-- Formulario para el elemento 2 -->
+    <form action=""></form>
+    <fieldset>
+        <h3>Elemento 2</h3>
+        <label for="cantidad">Cantidad</label>
+        <input type="number" name="cantidad" id="cantidad2" min="1">
+        <label for="precioUnidad">Precio unidad</label>
+        <input type="number" name="precioUnidad" id="precioUnidad2" min="1">
+        <label for="porcentaje">Porcentaje</label>
+        <select name="porcentaje" id="porcentaje2">
+            <option value="6">6%</option>
+            <option value="12">12%</option>
+            <option value="18">18%</option>
+        </select>
+        <input type="button" value="Calcular" onclick="mostrarPrecio2()">
+        <input type="button" value="Reset" onclick="reset2()">
+    </fieldset>
+    </form>
+    <p id="precioElemento2"></p>
+
+    <!-- Formulario para el elemento 3 -->
+    <form action=""></form>
+    <fieldset>
+        <h3>Elemento 3</h3>
+        <label for="cantidad">Cantidad</label>
+        <input type="number" name="cantidad" id="cantidad3" min="1">
+        <label for="precioUnidad">Precio unidad</label>
+        <input type="number" name="precioUnidad" id="precioUnidad3" min="1">
+        <label for="porcentaje">Porcentaje</label>
+        <select name="porcentaje" id="porcentaje3">
+            <option value="6">6%</option>
+            <option value="12">12%</option>
+            <option value="18">18%</option>
+        </select>
+        <input type="button" value="Calcular" onclick="mostrarPrecio3()">
+        <input type="button" value="Reset" onclick="reset3()">
+    </fieldset>
+    </form>
+    <p id="precioElemento3"></p>
+
+    <script>
+        //Calcular precio del elemento
+        calcularPrecioTotal = (cantidad, precioUnidad, porcentaje) => (cantidad * precioUnidad * porcentaje) + (cantidad * porcentaje);
+
+        //Calcula y muestra el precio del elemento 1
+        mostrarPrecio1 = () => {
+            let cantidad = document.getElementById("cantidad1").value;
+            let precioUnidad = document.getElementById("precioUnidad1").value;
+            let porcentaje = document.getElementById("porcentaje1").value;
+
+            document.getElementById("precioElemento1").innerText = "Precio total: " + calcularPrecioTotal(cantidad, precioUnidad, porcentaje);
+        }
+
+        //Calcula y muestra el precio del elemento 2
+        mostrarPrecio2 = () => {
+            let cantidad = document.getElementById("cantidad2").value;
+            let precioUnidad = document.getElementById("precioUnidad2").value;
+            let porcentaje = document.getElementById("porcentaje2").value;
+
+            document.getElementById("precioElemento2").innerText = "Precio total: " + calcularPrecioTotal(cantidad, precioUnidad, porcentaje);
+        }
+
+        //Calcula y muestra el precio del elemento 3
+        mostrarPrecio3 = () => {
+            let cantidad = document.getElementById("cantidad3").value;
+            let precioUnidad = document.getElementById("precioUnidad3").value;
+            let porcentaje = document.getElementById("porcentaje3").value;
+
+            document.getElementById("precioElemento3").innerText = "Precio total: " + calcularPrecioTotal(cantidad, precioUnidad, porcentaje);
+        }
+
+        //Poner valores a 0 en elemento 1
+        reset1 = () => {
+            document.getElementById("cantidad1").value = 0;
+            document.getElementById("precioUnidad1").value = 0;
+            document.getElementById("porcentaje1").value = 0;
+        }
+        
+        //Poner valores a 0 en elemento 2
+        reset2 = () => {
+            document.getElementById("cantidad2").value = 0;
+            document.getElementById("precioUnidad2").value = 0;
+            document.getElementById("porcentaje2").value = 0;
+        }
+
+        //Poner valores a 0 en elemento 3
+        reset3 = () => {
+            document.getElementById("cantidad3").value = 0;
+            document.getElementById("precioUnidad3").value = 0;
+            document.getElementById("porcentaje3").value = 0;
+        }
+    </script>
+</body>
+
+</html>

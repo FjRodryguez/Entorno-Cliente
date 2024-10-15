@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+<body>
+    <script>
+        //Métodos de array
+        document.write("<h3>Métodos de arrays</h3>");
+        var colores = ["rojo", "azul", "verde"];
+        var vector = ["hola", 343, 7.656, true];
+
+        document.write(colores[0]);
+        document.write("<br>" + colores[colores.length-1]);
+        document.write("<br>" + vector + "<br>");
+
+        document.write("<ul>");
+        for (let i = 0; i < vector.length; i++) {
+            document.write("<li>" + vector[i] + "</li>");
+        }
+        document.write("</ul>");
+
+        colores.forEach(valor => document.write(valor.toUpperCase() + " "));
+
+        vector.push("otro elemento");
+        document.write("<br>" + vector);
+        vector.pop();
+        document.write("<br>" + vector);
+
+        vector.unshift("otro elemento");
+        document.write("<br>" + vector);
+        vector.shift();
+        document.write("<br>" + vector);
+
+        delete vector[2];
+        document.write("<br>" + vector);
+        document.write("<br>" + vector.length);
+
+        colores.splice(2, 0 , "amarillo", "naranja", "violeta");
+    
+        document.write("<br>" + colores);
+        colores.splice(2, 1, "gris");
+        document.write("<br>" + colores);
+        colores.splice(2, 1);
+        document.write("<br>" + colores);
+
+        var union = colores.concat(vector);
+        document.write("<br>" + union);
+
+        var trozo = union.slice(1, 7);
+        document.write("<br>" + trozo);
+
+        //Ordenación de arrays
+        document.write("<h3>Ordenación de arrays</h3>");
+        var cadenas = ["aabc", "abc", "zdc", "ew"];
+        var numeros = [4, 40, 2, 220, 1, 10];
+
+        document.write("<br>" + cadenas.sort());
+
+        //ordena mal
+        document.write("<br>" + numeros.sort() + "<--!!!");
+
+        //ordena bien
+        document.write("<br>" + numeros.sort(ordenar = (a, b) => a - b ));
+
+        //ordena de manera random
+        document.write("<br>" + numeros.sort(function (a, b) { return 0.5 - Math.random()}));
+        
+        function maximo (numeros){ return Math.max.apply(null, numeros)};
+        document.write("<br>" + maximo(numeros));
+
+        //Iteración sobre arrays
+        document.write("<h3>Iteración sobre arrays</h3>");
+        var numeros = [45, 4, 9, 16, 25];
+        function mostrarVector(valor, indice, vector){
+            document.write("Pos " + indice + " = " + valor + "<br>");
+        }
+        numeros.forEach(mostrarVector);
+
+        porDos = (valor) => valor * 2;
+        var doble = numeros.map(porDos);
+        document.write(doble);
+
+        filtrar = (valor) => valor > 10;
+        var filtro = numeros.filter(filtrar);
+        document.write("<br>" + filtro);
+
+        sumar = (total, valor, indice, vector) => total + valor;
+        var sumatorio = numeros.reduce(sumar);
+        document.write("<br>" + sumatorio);
+
+        comprobarTodos = (valor) => valor > 10;
+        document.write("<br>" + numeros.every(comprobarTodos));
+
+        comprobarAlgunos = (valor) => valor > 10;
+        document.write("<br>" + numeros.some(comprobarAlgunos));
+
+        encontrar = (valor) => valor == 9;
+        document.write("<br> "+ numeros.find(encontrar) + " pos = " + numeros.find(encontrar));
+
+        //Arrays de dos dimensiones
+        document.write("<h3>Arrays de dos dimensiones</h3>");
+        //array 4x4
+        var matriz = new Array(4);
+        for (let i = 0; i < matriz.length; i++) {
+            matriz[i] = new Array(4);
+        }
+
+        //inserción de valores
+        for (let i = 0; i < matriz.length; i++) {
+            for (let j = 0; j < matriz[i].length; j++) {
+                matriz[i][j] = Math.ceil(Math.random() * 9);
+            }
+        }
+
+        //recorrido de la matriz
+        for (let i = 0; i < matriz.length; i++) {
+            for (let j = 0; j < matriz.length; j++) {
+                document.write(matriz[i][j] + " ");
+            }
+            document.write("<br>");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular area</title>
+    <style>
+        div{
+            margin: auto;
+        }
+        #contendor {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        form{
+            margin: auto;
+            width: 55%;
+        }
+        fieldset{
+            padding: 20px;
+        }
+        input{
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contendor">
+        <div>
+            <h1>Cuadrado</h1>
+            <p id="areaCuadrado"></p>
+        </div>
+        <div>
+            <h1>Círculo</h1>
+            <p id="areaCirculo"></p>
+        </div>
+        <div>
+            <h1>Triangulo</h1>
+            <p id="areaTriangulo"></p>
+        </div>
+    </div>
+
+    <form action="">
+        <fieldset>
+            <label for="ladoCuadrado">Lado cuadrado</label>
+            <input type="number" name="ladoCuadrado" id="ladoCuadrado" min="1">
+            <label for="radioCirculo">Radio círculo</label>
+            <input type="number" name="radioCirculo" id="radioCirculo" min="1">
+            <label for="baseTriangulo">Base triangulo</label>
+            <input type="number" name="baseTriangulo" id="baseTriangulo" min="1">
+            <label for="alturaTriangulo">Altura triangulo</label>
+            <input type="number" name="alturaTriangulo" id="alturaTriangulo" min="1">
+            <input type="button" value="Calcular áreas" onclick="calcularAreas()">
+        </fieldset>
+    </form>
+</body>
+<script src="script.js"></script>
+
+</html>

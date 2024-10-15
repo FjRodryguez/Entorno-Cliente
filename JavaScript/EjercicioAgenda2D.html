@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: rgb(125, 125, 125);
+        }
+
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form input {
+            width: 90%;
+            height: 30px;
+            margin: 0.5rem;
+        }
+
+        fieldset {
+            width: 300px;
+        }
+
+        button {
+            padding: 0.5em;
+            margin-left: 7px;
+            width: 280px;
+            border: 1px solid black;
+            background: rgb(100, 200, 255);
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+
+        .tablaSearch {
+            width: 80px;
+        }
+
+        .tablaText {
+            width: 165px;
+        }
+
+        input[type="radio"]+label:before {
+            content: "";
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 0 11px 0 0;
+            border: 2px solid #ccc;
+            background: #fff;
+            border-radius: 100%;
+        }
+
+        input[type="radio"]:checked+label:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border: 6px solid #ce495c;
+            float: left;
+            margin-left: -1.6em;
+            margin-top: 0.25em;
+            border-radius: 100%;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+    </style>
+    <title>Ejercicio Agenda 2D</title>
+</head>
+
+<body>
+    <form>
+        <fieldset>
+            <legend><b>Introducción de datos</b></legend>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" autofocus>
+            </br>
+            <label for="edad">Edad:</label>
+            <input type="number" name="edad" id="edad">
+            </br>
+            <label for="telf">Teléfono:</label>
+            <input type="tel" name="telf" id="telf">
+            </br>
+            <button type="button" onclick="saveData()">Guardar</button>
+            <button type="button" onclick="showData()">Mostrar</button>
+        </fieldset>
+        <fieldset>
+            <legend><b>Buscar y borrar</b></legend>
+            <table>
+                <tr>
+                    <td><input type="radio" name="filter" id="filterName" value="nombre"><label
+                            for="filterName">Nombre</label></td>
+
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="filter" id="filterAge" value="edad"><label
+                            for="filterAge">Edad</label></td>
+                    <td><input type="text" name="toSearch" id="toSearch" class="tablaText"></td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="filter" id="filterTel" value="tel"><label for="filterTel">Telf</label>
+                    </td>
+                    <td><button type="button" onclick="searchData()" class="tablaSearch">Buscar</button>
+                        <button type="button" onclick="removeData()" class="tablaSearch">Borrar</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <h3 id="peopleTitle">CONTACTOS</h3>
+        <textarea name="resultData" id="resultData" cols="60" rows="10"></textarea>
+    </form>
+
+    <script>
+        // Declaración del array bidimensional
+        var people = new Array(10);
+        for (let i = 0; i < people.length; i++) {
+            people[i] = new Array(3);
+        }
+        // Contador de datos de personas
+        var counterData = 0;
+        // Función que rellena el array de personas con los datos dados por teclado
+        function saveData() {
+            // Guardamos los datos de cada persona
+            people[counterData][0] = document.getElementById("nombre").value;
+            people[counterData][1] = document.getElementById("edad").value;
+            people[counterData][2] = document.getElementById("telf").value;
+
+            // Incrementamos el contador de personas
+            counterData++;
+        }
+
+        // Función que rellena el textarea con los datos almacenados en el array de personas
+        function showData() {
+            // Variable para concatenar
+            let data = "";
+            // Array para concatenar
+            let stringsToConcat = ["- Nombre: ", " // Edad: ", " // Teléfono: "];
+
+            // Concatenamos
+            for (let i = 0; i < counterData; i++) {
+                for (let j = 0; j < 3; j++) {
+                    data += stringsToConcat[j] + people[i][j];
+                }
+                data += "\n";
+            }
+
+            // Rellenamos el título de los contactos
+            document.getElementById("peopleTitle").innerHTML = "CONTACTOS (" + (counterData) + ")";
+            // Rellenamos el textarea con los datos
+            document.getElementById("resultData").value = data;
+        }
+
+        // Función que busca filtrando por el valor que nos dan escrito y en el radiobutton
+        function searchData() {
+            let textToSearch = document.getElementById("toSearch").value;
+            let dataToSearch = document.querySelector('input[name="filter"]:checked').value;
+            if (dataToSearch == "nombre") {
+                dataToSearch = 0;
+            } else if (dataToSearch == "edad") {
+                dataToSearch = 1;
+            } else {
+                dataToSearch = 2;
+            }
+
+            // Variable para concatenar
+            let data = "";
+            // Array para concatenar
+            let stringsToConcat = ["- Nombre: ", " // Edad: ", " // Teléfono: "];
+
+            for (let i = 0; i < counterData; i++) {
+                if (people[i][dataToSearch] == textToSearch) {
+                    data += "- Nombre: " + people[i][0] + " // Edad: " +
+                        people[i][1] + " // Teléfono: " + people[i][2] + "\n";
+                }
+            }
+
+            // Rellenamos el título de los contactos
+            document.getElementById("peopleTitle").innerHTML = "CONTACTOS ENCONTRADOS";
+            // Rellenamos el textarea con los datos
+            document.getElementById("resultData").value = data;
+        }
+
+        // Función que borra y reordena el array
+        function removeData() {
+            let textToSearch = document.getElementById("toSearch").value;
+            let dataToSearch = document.querySelector('input[name="filter"]:checked').value;
+            if (dataToSearch == "nombre") {
+                dataToSearch = 0;
+            } else if (dataToSearch == "edad") {
+                dataToSearch = 1;
+            } else {
+                dataToSearch = 2;
+            }
+            let counterDelete = 0;
+            for (let i = 0; i < counterData; i++) {
+                if (people[i][dataToSearch] == textToSearch) {
+                    people.splice(i, 1);
+                    counterDelete++;
+                }
+            }
+            let allCovered = true;
+            do {
+                for (let i = counterData; i > 0; i--) {
+                    if (people[i - 1] == undefined && people[i] != undefined) {
+                        let person = people.pop();
+                        people.push(person);
+                        allCovered = false;
+                    }
+                }
+            } while (!allCovered);
+            counterData -= counterDelete;
+        }
+    </script>
+</body>
+
+</html>

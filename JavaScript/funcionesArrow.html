@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones arrow</title>
+</head>
+<body>
+    <script>
+        //Función tradicional
+        function hola(){
+            return "hola1";
+        }
+        document.write(hola() + "<br>");
+
+        //Función anónima
+        var hola;
+        hola = function(){
+            return "hola2";
+        }
+        document.write(hola());
+
+        //Funciones arrow
+        hola = () => {return "hola3";}
+        document.write("<br>" + hola());
+
+        hola = () => "hola4";
+        document.write("<br>" + hola());
+
+        var nombre = "Pepe";
+        saludar = saludo => saludo + " "+ nombre;
+        document.write("<br>"+saludar("hola"));
+
+        sumar = (x, y) => x + y;
+        document.write("<br>"+sumar(6, 10));
+        
+        multiplicar = (x, y) => {
+            document.write("<br>Resultado: ");
+
+            return x * y;
+        }
+        document.write(multiplicar(2, 6));
+    </script>
+</body>
+</html>
