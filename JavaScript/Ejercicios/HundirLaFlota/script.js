@@ -1,12 +1,12 @@
 const tablero = [
-    [0, 0, 1, 0, 0, 0, 0, 0],
     [1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0],
     [0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0],
     [0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 1, 0]
+    [0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1]
 ]
 
 let aciertos = 0;
@@ -59,8 +59,6 @@ function disparar(x, y) {
         window.alert("Ganaste!");
         reiniciarTablero();
     }
-
-    
 }
 
 function dispararCoordenadas(){
@@ -70,6 +68,7 @@ function dispararCoordenadas(){
 }
 
 function reiniciarTablero(){
+    aciertos = 0;
     const celdas = document.querySelectorAll("td");
     celdas.forEach(celda => {
         celda.style.backgroundColor = "white";
