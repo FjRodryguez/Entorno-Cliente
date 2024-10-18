@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Hundir la flota</title>
+</head>
+
+<body>
+
+    <table id="tabla"></table>
+
+    <div>
+        <p id="resultado"></p>
+        <form action="">
+            <label for="coordenadaX">Coordenada X</label>
+            <input type="number" name="coordenadaX" id="coordenadaX" min="0" max="7">
+            <label for="coordenadaY">Coordenada Y</label>
+            <input type="number" name="coordenadaY" id="coordenadaY" min="0" max="7">
+
+            <input type="button" value="Disparar" onclick="dispararCoordenadas()">
+        </form>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
