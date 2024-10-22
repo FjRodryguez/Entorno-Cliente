@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones de tiempo</title>
+</head>
+<body>
+    <script>
+        //Manera 1
+        let intervalo = setInterval(funCB, 500);
+        setTimeout(parar(), 5000);
+
+        function funCB(){
+            document.write("Hola");
+        }
+
+        function parar(){
+            clearInterval(intervalo);
+        }
+
+        //Manera 2
+        let intervalo2 = setInterval(() => document.write("Hola"), 500);
+
+        setTimeout(() => clearInterval(intervalo2), 5000);
+    </script>
+</body>
+</html>
