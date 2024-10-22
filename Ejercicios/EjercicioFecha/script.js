@@ -70,15 +70,14 @@ function validaFechaDDMMAAAA(fecha) {
     }
 }
 
-calcularDias = (arrayFecha) => {
-    parseInt(arrayFecha[0]) + (parseInt(arrayFecha[1]) * 30.4167) + (parseInt((arrayFecha[2] - 1970) * 365));
-}
+calcularDias = (arrayFecha) => parseInt(arrayFecha[0]) + (parseInt(arrayFecha[1]) * 30.4167) + ((parseInt(arrayFecha[2] - 1970) * 365));
 
 function calcularFecha(dias){
+    console.log(dias);
     let fecha = [];
     fecha[2] = parseInt(dias/365);
-    fecha[1] = parseInt((dias%365) / 12);
-    fecha[0] = parseInt((dias%365) % 12);
+    fecha[1] = parseInt((dias%365) / 30.4167);
+    fecha[0] = parseInt((dias%365) % 30.4167);
     return fecha;
 }
 
@@ -88,8 +87,8 @@ function procesarFechas(){
     let resultado = document.getElementById("resultado");
 
     if(validaFechaDDMMAAAA(inputFecha1) && validaFechaDDMMAAAA(inputFecha2)){
-        const arrayFecha1 = inputFecha1.split("/").map(item => item.trim());
-        const arrayFecha2 = inputFecha2.split("/").map(item => item.trim());
+        const arrayFecha1 = inputFecha1.split("/");
+        const arrayFecha2 = inputFecha2.split("/");
         let diasFecha1 = calcularDias(arrayFecha1);
         let diasFecha2 = calcularDias(arrayFecha2);
         if(diasFecha1 < diasFecha2){
