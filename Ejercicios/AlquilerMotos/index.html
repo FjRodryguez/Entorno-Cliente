@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alquiler de motos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="container">
+        <h1>Alquiler de motos</h1>
+
+        <form action="">
+            <fieldset id="field-fechas">
+                <div class="div-fechas">
+                    <label for="recogida">Fecha recogida</label>
+                    <input type="date" name="recogida" id="recogida" onchange="cambiarMinEntrega()">
+                </div>
+                <div class="div-fechas">
+                    <label for="entrega">Fecha entrega</label>
+                    <input type="date" name="entrega" id="entrega">
+                </div>
+            </fieldset>
+
+            <fieldset id="modelos"></fieldset>
+
+            <p id="resultado"></p>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

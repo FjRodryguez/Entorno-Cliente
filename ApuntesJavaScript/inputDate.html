@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input date</title>
+</head>
+
+<body>
+    <!-- Con evento -->
+    <h2>Selecciona una fecha:</h2>
+    <input type="date" name="fecha1" id="fecha1">
+
+    <!-- Sin evento -->
+    <h2>Selecciona una fecha:</h2>
+    <input type="date" name="fecha2" id="fecha2" onchange="mostrarFecha()">
+
+    <script>
+        
+        function obtenerFechaActual(){
+            const fecha = new Date();
+            const dia = fecha.getDate().toString().padStart(2, "0");
+            const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
+            const anho = fecha.getFullYear();
+            
+            return `${anho}-${mes}-${dia}`;
+        }
+        const inputFecha1 = document.getElementById('fecha1');
+        const inputFecha2 = document.getElementById('fecha2');
+        inputFecha1.value = obtenerFechaActual();
+        inputFecha1.min = obtenerFechaActual();
+        
+        inputFecha2.value = obtenerFechaActual();
+        inputFecha2.min = obtenerFechaActual();
+
+        //Con eventos
+        inputFecha1.addEventListener('change', function () {
+            let fechaSeleccionada = inputFecha1.value;
+            console.log("Fecha seleccionada: " + fechaSeleccionada);
+        });
+        
+        //Sin eventos
+        function mostrarFecha() {
+            let fechaSeleccionada = inputFecha2.value;
+            console.log("Fecha seleccionada: " + fechaSeleccionada)
+        }
+    </script>
+</body>
+
+</html>

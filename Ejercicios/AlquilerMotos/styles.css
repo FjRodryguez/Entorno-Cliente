@@ -1,0 +1,22 @@
+fieldset{
+    padding: 20px;
+    margin: 10px;
+}
+h1{
+    text-align: center;
+}
+#container{
+    margin: auto;
+    width: 50%;
+}
+#field-fechas{
+    columns: 2;
+    column-gap: 30px;
+}
+.div-fechas{
+    display: flex;
+    flex-direction: column;
+}
+#modelos{
+    columns: 2;
+}
