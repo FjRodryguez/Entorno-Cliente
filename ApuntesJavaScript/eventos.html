@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+</head>
+
+<body onload="iniciar(), comprobarCookies()" onunload="finalizar()">
+
+    <div id="prueba" onmouseover="setTexto01()" onmouseout="setTextoInic()"></div>
+
+    <p id="prueba2"></p>
+
+    <div onmousedown="mDown(this)" onmouseup="mUp(this)"
+        style="background-color: #d94a38; width: 90px;height: 20px;padding: 40px;">Haz click...</div>
+
+    <script>
+        function setTexto01() {
+            document.getElementById("prueba").innerHTML = "Quita el ratón!!!";
+        }
+
+        function setTextoInic() {
+            document.getElementById("prueba").innerHTML = "Pasa el ratón...";
+        }
+
+        function iniciar() {
+            document.getElementById("prueba").innerHTML = "Pasa el ratón...";
+        }
+
+        function finalizar() {
+            console.log("Adios");
+        }
+
+        function comprobarCookies() {
+            var text = "";
+            if (navigator.cookieEnabled == true) {
+                text = "Cookies activadas";
+            } else {
+                text = "Cookies no activadas";
+            }
+            document.getElementById("prueba2").innerHTML = text;
+        }
+
+        function mDown(obj) {
+            obj.style.backgroundColor = "#1ec5ec";
+            obj.innerHTML = "Suelta...";
+        }
+
+        function mUp(obj) {
+            obj.style.backgroundColor = "#d94a38";
+            obj.innerHTML = "Gracias...";
+        }
+
+    </script>
+</body>
+
+</html>
