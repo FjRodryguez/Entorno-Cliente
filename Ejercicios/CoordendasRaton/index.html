@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordenadas del Ratón en tiempo real</title>
+    <style>
+        #coordenadas {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="coordenadas">Cargando...</div>
+    <script>
+        var coordenadas = document.getElementById("coordenadas");
+        document.onmousemove = function (event) {
+            let x = event.clientX;
+            let y = event.clientY;
+            let pageX = event.pageX;
+            let pageY = event.pageY;
+            coordenadas.style.left = `${pageX + 10}px`;
+            coordenadas.style.top = `${pageY + 10}px`;
+        }
+
+        function mostrarHora() {
+            let hora = new Date();
+            let horas = hora.getHours().toString().padStart(2, "0");
+            let minutos = hora.getMinutes().toString().padStart(2, "0");
+            let segundos = hora.getSeconds().toString().padStart(2, "0");
+
+            coordenadas.textContent = `${horas}:${minutos}:${segundos}`;
+        }
+
+        setInterval(mostrarHora, 1000);
+    </script>
+</body>
+
+</html>
