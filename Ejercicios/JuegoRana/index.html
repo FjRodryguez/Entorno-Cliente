@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de la rana</title>
+    <style>
+        #rana {
+            width: 0%;
+            height: 0%;
+            position: absolute;
+        }
+        #caja {
+            width: 0%;
+            height: 0%;
+            position: absolute;
+        }
+        #contenedor{
+            display: flex;
+            flex-direction: row;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor">
+        <div>
+            <h3>Marcador</h3>
+            <p id="marcador">Aciertos: 0</p>
+        </div>
+        <div>
+            <h3>Saltos</h3>
+            <p id="saltos"></p>
+        </div>
+    </div>
+    <div id="tablero">
+        <img src="img/rana.jpg" alt="" id="rana" onclick="aumentarMarcador()">
+        <img src="img/caja.png" alt="" id="caja" onclick="abrirCaja()">
+    </div>
+
+    <script>
+        let saltos = 10;
+        let aciertos = 0;
+        let tiempo = 2000;
+        let ranaX = 500;
+        let ranaY = 500;
+        let alturaEncabezado = document.getElementById("contenedor").style.height;
+        let tablero = document.getElementById("tablero");
+        let rana = document.getElementById("rana");
+        let caja = document.getElementById("caja");
+        let saltosRestantes = document.getElementById("saltos");
+        saltosRestantes.innerText = saltos;
+        let tableroX = tablero.style.width = window.innerWidth;
+        let tableroY = tablero.style.height = window.innerHeight - alturaEncabezado;
+
+        let intervalo = setInterval(mostrarRana, tiempo);
+        let apareceCaja = setTimeout(mostrarCaja, 3000);
+        function mostrarRana() {
+            if (saltos === 0) {
+                clearInterval(intervalo);
+                rana.style.width = "0px"
+                rana.style.height = "0px"
+            } else {
+                rana.style.width = ranaX + "px";
+                rana.style.height = ranaY + "px";
+                rana.style.top = `${Math.random() * (tableroY - ranaY)}px`;
+                rana.style.left = `${Math.random() * (tableroX - ranaX)}px`;
+                saltos--;
+                saltosRestantes.innerText = saltos;
+            }
+        }
+
+        function mostrarCaja() {
+            caja.style.width = "50px";
+            caja.style.height = "50px";
+            caja.style.top = `${Math.random() * (tableroY - caja.style.height)}px`;
+            caja.style.left = `${Math.random() * (tableroX - caja.style.width)}px`;
+            console.log(caja.style.top);
+        }
+
+        function aumentarMarcador() {
+            let marcador = document.getElementById("marcador");
+            intervalo = nuevoIntervalo();
+            ranaX -= 50;
+            ranaY -= 50;
+            aciertos++;
+            marcador.innerText = "Aciertos: " + aciertos;
+        }
+
+        function abrirCaja(){
+            
+        }
+
+        function nuevoIntervalo() {
+            clearInterval(intervalo);
+            tiempo -= 200;
+            return setInterval(mostrarRana, tiempo)
+        }
+    </script>
+</body>
+</html>
