@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastrar y Soltar Imagen</title>
+    <style>
+        #contenedor {
+            border: 2px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            position: absolute;
+            cursor: grab;
+        }
+
+        .container {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            flex-direction: row;
+            margin: auto;
+            text-align: center;
+        }
+
+        #circulo {
+            left: 20px;
+        }
+
+        #triangulo {
+            left: 220px;
+        }
+
+        #rectangulo {
+            left: 440px;
+        }
+
+        #principal{
+            position: relative;
+            left: 20px;
+            top: 900px;
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor">
+        <img id="triangulo" src="img/triangulo.png" onmousedown="iniciarArrastre(event)">
+        <img id="circulo" src="img/circulo.png" onmousedown="iniciarArrastre(event)">
+        <img id="rectangulo" src="img/rectangulo.png" onmousedown="iniciarArrastre(event)">
+        <div id="principal">
+            <div id="triangulo-container" class="container">Círculo</div>
+            <div id="circulo-container" class="container">Triángulo</div>
+            <div id="rectangulo-container" class="container">Rectángulo</div>
+        </div>
+    </div>
+
+    <script>
+        let contenedor = document.getElementById("contenedor");
+        contenedor.style.width = `${window.innerWidth - 20}px`;
+        contenedor.style.height = `${window.innerHeight - 20}px`;
+
+        let contenedorTriangulo = document.getElementById("triangulo-container");
+        let contenedorCirculo = document.getElementById("circulo-container");
+        let contenedorRectangulo = document.getElementById("rectangulo-container");
+
+        // Variables para almacenar el desplazamiento inicial
+        let desplazamientoX = 0;
+        let desplazamientoY = 0;
+
+        // Función para iniciar el arrastre
+        function iniciarArrastre(evento) {
+            if (evento.button !== 0) return; // Solo iniciar si el botón izquierdo está presionado
+
+            evento.preventDefault(); // Prevenir el arrastre predeterminado del navegador
+
+            const imagen = evento.target;
+            imagen.style.cursor = "grabbing";
+
+            // Obtener la posición inicial de la imagen en relación al punto de clic
+            desplazamientoX = evento.pageX - (parseInt(imagen.style.left) || 0);
+            desplazamientoY = evento.pageY - (parseInt(imagen.style.top) || 0);
+
+            // Asignar los eventos de movimiento y de soltar el mouse
+            imagen.onmousemove = moverImagen;
+            imagen.onmouseup = detenerArrastre;
+
+            // Mover la imagen a la posición inicial del clic
+            moverImagen(evento);
+
+            if(desplazamientoX === contenedorCirculo){
+                imagen.style.visibility = "hidden";
+            }
+        }
+
+        // Función para mover la imagen
+        function moverImagen(evento) {
+            const imagen = evento.target;
+
+            // Si el botón izquierdo no está presionado, detener el arrastre
+            if (evento.buttons !== 1) {
+                detenerArrastre(evento);
+                return;
+            }
+
+            let imagenX = 0;
+            let imagenY = 0;
+
+            // Calcular y asignar la nueva posición
+            imagen.style.left = `${evento.pageX - desplazamientoX}px`;
+            imagen.style.top = `${evento.pageY - desplazamientoY}px`;
+        }
+
+        // Función para detener el arrastre
+        function detenerArrastre(evento) {
+            const imagen = evento.target;
+            imagen.style.cursor = "grab";
+
+            // Quitar los eventos de movimiento y de soltar el mouse
+            imagen.onmousemove = null;
+            imagen.onmouseup = null;
+        }
+    </script>
+</body>
+
+</html>
