@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redimensionar imagen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <img src="img/imagen.png" alt="" id="imagen">
+        <div id="cuadrado"></div>
+    </div>
+
+    <script>
+        const image = document.getElementById('imagen');
+        const cuadrado = document.getElementById('cuadrado');
+        cuadrado.style.display = "none";
+        
+        let habilitarRedimension = false;
+
+        // Permitir el redimensionamiento
+        function redimensionar(event) {
+            event.preventDefault();
+            habilitarRedimension = true;
+        }
+
+        // Evento cuando se mueve el ratón
+        document.onmousemove = function (event) {
+            if (!habilitarRedimension) return;
+
+            // Calcula el nuevo tamaño de la imagen
+            const width = event.clientX - image.getBoundingClientRect().left;
+            const height = event.clientY - image.getBoundingClientRect().top;
+            image.style.width = width + 'px';
+            image.style.height = height + 'px';
+        }
+
+        // Función cuando se suelta el botón del ratón
+        document.onmouseup = function(){
+            habilitarRedimension = false;
+        }
+
+        document.onkeydown = function (event){
+            if(event.code != "KeyR") return;
+            cuadrado.style.display = "block";
+            cuadrado.addEventListener("mousedown", redimensionar);
+        }
+
+        document.onkeyup = function (event){
+            cuadrado.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

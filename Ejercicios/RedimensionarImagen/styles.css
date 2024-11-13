@@ -1,0 +1,20 @@
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.container img {
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+#cuadrado {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    cursor: se-resize;
+}

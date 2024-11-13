@@ -1,0 +1,45 @@
+#contenedor {
+    border: 2px solid #333;
+    position: relative;
+}
+
+img {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    cursor: grab;
+}
+
+.container {
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    flex-direction: row;
+    margin: auto;
+    text-align: center;
+}
+
+#principal {
+    position: relative;
+    left: 20px;
+    top: 900px;
+    display: flex;
+}
+
+#circulo {
+    left: 20px;
+}
+
+#triangulo {
+    left: 220px;
+}
+
+#rectangulo {
+    left: 440px;
+}
+
+#circulo-container,
+#triangulo-container,
+#rectangulo-container {
+    position: relative;
+}
