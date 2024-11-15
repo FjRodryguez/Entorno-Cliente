@@ -51,6 +51,7 @@
 
         document.onkeyup = function (event){
             cuadrado.style.display = "none";
+            cuadrado.removeEventListener("mousedown", redimensionar);
         }
     </script>
 </body>
