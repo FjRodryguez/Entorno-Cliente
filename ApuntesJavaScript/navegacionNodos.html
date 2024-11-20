@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navegación por nodos</title>
+</head>
+
+<body>
+    <h1 id="id01">Ejemplo</h1>
+
+    <p id="parrafo" style="color:lightgreen;">Parrafo de ejemplo</p>
+    <p>Parrafo hermano</p>
+    <input type="button" value="Muestra el nombre de cada atributo y su valor" onclick="listadoAtributos()">
+    <input type="text" id="result" value="">
+    <br>
+
+    <script>
+        // alert(document.body.innerHTML);
+        // alert(document.documentElement.innerHTML);
+
+        var x = document.getElementById("id01").nodeName;
+        document.write("Nombre del nodo: " + x);
+
+        x = document.getElementById("id01").firstChild.nodeValue;
+        document.write("<br />Valor del nodo: " + x);
+
+        x = document.getElementById("id01").nodeType;
+        document.write("<br />Tipo del nodo: " + x);
+        var parrafo = document.getElementById("parrafo");
+
+        let hermanoParrafo = parrafo.nextSibling;
+        document.write(`<br>Nombre nodo: ${hermanoParrafo.nodeName} `)
+        document.write(`Valor nodo: ${hermanoParrafo.nodeValue} `)
+        document.write(`Tipo nodo: ${hermanoParrafo.nodeType}`)
+
+        function listadoAtributos() {
+            var resultado = document.getElementById("result");
+
+            if (parrafo.hasAttributes()) {
+                var attrs = parrafo.attributes;
+                var salida = "";
+                for (let i = 0; i < attrs.length; i++) {
+                    salida += attrs[i].name + "->" + attrs[i].value + ";";
+                }
+                resultado.value = salida;
+            } else {
+                resultado.value = "No hay atributos a mostrar";
+            }
+        }
+    </script>
+</body>
+
+</html>

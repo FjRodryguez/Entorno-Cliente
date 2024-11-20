@@ -1,0 +1,55 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.contenedor-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input {
+    padding: 5px;
+}
+
+#divBotones {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.boton {
+    padding: 15px;
+    border: none;
+    background-color: #3498DB;
+    color: white;
+    border-radius: 10px;
+}
+
+table, tr, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    background-color: lightgray;
+}
+
+tr:hover{
+    background-color: darkgray;
+}

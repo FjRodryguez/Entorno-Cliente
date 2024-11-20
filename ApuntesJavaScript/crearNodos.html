@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de nodos</title>
+</head>
+
+<body id="body">
+    <script>
+        let button = document.createElement("button");
+        button.textContent = "Aparecer imagen";
+        button.onclik = function () {
+            let image = document.createElement("img");
+            image.setAttribute("src", "img/rana.jpg");
+            image.setAttribute("alt", "Imagen de una rana");
+            document.body.insertBefore(image, div2);
+        }
+        document.body.appendChild(button);
+        
+        let div1 = document.createElement("div");
+        div1.setAttribute("id", "div1");
+
+        let div2 = document.createElement("div")
+        div2.setAttribute("id", "div2");
+        
+        let p1 = document.createElement("p");
+        let contenidoP1 = document.createTextNode("Primer párrafo");
+        
+        let p2 = document.createElement("p");
+        let contenidoP2 = document.createTextNode("Segundo párrafo");
+        
+        div1.appendChild(p1).appendChild(contenidoP1);
+        div2.appendChild(p2).appendChild(contenidoP2);
+
+        document.body.appendChild(div1);
+        document.body.appendChild(div2);
+        
+        div1.appendChild(p2);
+        div2.appendChild(p1);
+        
+
+    </script>
+</body>
+
+</html>
