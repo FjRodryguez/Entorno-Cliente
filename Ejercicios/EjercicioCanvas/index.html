@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas centrado con círculo</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        canvas {
+            display: block;
+            background-color: black;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Crear el canvas
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        document.body.appendChild(canvas);
+
+        // Configurar dimensiones fijas para el canvas
+        function mostrarCanvas() {
+            canvas.width = window.innerWidth - 200;
+            canvas.height = window.innerHeight - 200;
+            dibujarCircle();
+        }
+
+        // Dibujar un círculo en el centro del canvas
+        function dibujarCircle() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) / 8;
+
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
+            context.fillStyle = 'white';
+            context.fill();
+            context.closePath();
+        }
+
+        // Inicializar el canvas
+        mostrarCanvas();
+    </script>
+</body>
+
+</html>

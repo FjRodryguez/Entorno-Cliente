@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación orientada a objetos</title>
+</head>
+
+<body>
+    <script>
+        class Padre {
+            constructor(propiedad1, propiedad2) {
+                this.propiedad1 = propiedad1;
+                this.propiedad2 = propiedad2;
+            }
+
+            setPropiedad1(propiedad1) {
+                this.propiedad1 = propiedad1;
+            }
+
+            getPropiedad1() {
+                return this.propiedad1;
+            }
+
+            setPropiedad2(propiedad2) {
+                this.propiedad2 = propiedad2;
+            }
+
+            getPropiedad2() {
+                return this.propiedad2;
+            }
+
+            escribir(){
+                document.write("Función escribir del Padre<br>");
+            }
+
+            toString() {
+                return "Propiedad 1: " + this.propiedad1 + "<br>Propiedad 2: " + this.propiedad2 + "<br>";
+            }
+        }
+
+        class Hijo extends Padre {
+            constructor(propiedad1, propiedad2, propiedad3) {
+                super(propiedad1, propiedad2);
+                this.propiedad3 = propiedad3;
+            }
+
+            setPropiedad3(propiedad3) {
+                this.propiedad3 = propiedad3;
+            }
+
+            getPropiedad3() {
+                return this.propiedad3;
+            }
+
+            escribir(){
+                document.write("Función escribir del Hijo<br>");
+            }
+
+            toString() {
+                return super.toString() + "Propiedad 3: " + this.propiedad3 + "<br>";
+            }
+        }
+
+        document.write("Objeto Padre<br>");
+        const obj = new Padre("hola", "adios");
+        document.write(obj.getPropiedad1() + "<br>" + obj.getPropiedad2() + "<br>");
+        obj.setPropiedad1("a");
+        obj.setPropiedad2("b");
+        document.write(obj.getPropiedad1() + "<br>" + obj.getPropiedad2() + "<br>");
+        document.write(obj.toString());
+
+        document.write("<br>Objeto Hijo<br>");
+        const obj2 = new Hijo("hola", "que tal", "adios");
+        document.write(obj2.getPropiedad1() + "<br>" + obj2.getPropiedad2() + "<br>", obj2.getPropiedad3() + "<br>");
+        obj2.setPropiedad1("a");
+        obj2.setPropiedad2("b");
+        obj2.setPropiedad3("c");
+        document.write(obj2.getPropiedad1() + "<br>" + obj2.getPropiedad2() + "<br>", obj2.getPropiedad3() + "<br>");
+        document.write(obj2.toString());
+        document.write(obj2 instanceof Padre);
+
+        document.write("<br><br>Función polimórfica<br>");
+        const objetos = [obj, obj2];
+        objetos.forEach(objeto => {
+            objeto.escribir();
+        });
+    </script>
+</body>
+
+</html>
