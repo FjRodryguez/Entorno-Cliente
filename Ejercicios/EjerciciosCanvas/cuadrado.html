@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadrado</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        canvas {
+            display: block;
+            background-color: black;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        document.body.appendChild(canvas);
+
+        function mostrarCanvas(){
+            canvas.width = window.innerWidth - 200;
+            canvas.height = window.innerHeight - 200;
+            dibujarCuadrado();
+        }
+
+        function dibujarCuadrado(){
+            const punto = [canvas.width / 4, canvas.height / 4];
+            const base = 50;
+            const altura = 100;
+            context.fillRect(punto[0], punto[1], base, 0);
+            context.fillRect(punto[0], punto[1], base, 0);
+            context.fillRect(punto[0], punto[1], base, 0);
+            context.fillRect(punto[0], punto[1], base, 0);
+            context.fillStyle = 'white';
+            context.fill();
+        }
+
+        mostrarCanvas();
+    </script>
+</body>
+
+</html>l

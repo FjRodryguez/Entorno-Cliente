@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj Simplificado</title>
+  <style>
+    body {
+      /* Centramos el canvas en la página */
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    canvas {
+      /* Estilo del canvas: fondo blanco, borde y sombra */
+      background-color: white;
+      border: 2px solid #333;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="reloj" width="400" height="400"></canvas>
+
+  <script>
+    // Referencia al elemento canvas y su contexto 2D
+    const canvas = document.getElementById("reloj");
+    const ctx = canvas.getContext("2d");
+
+    // Centro del reloj y radio de la circunferencia
+    const centro = { x: 200, y: 200 };
+    const radio = 100;
+
+    // Generar los ángulos para los 12 números del reloj
+    // Cada número se coloca a intervalos regulares (2π / 12) con ajuste para que el "12" esté arriba
+    const angulos = Array.from({ length: 12 }, (_, i) => (i * 2 * Math.PI) / 12 - Math.PI / 2);
+
+    // Calcular las coordenadas de cada número del reloj
+    const coordenadas = angulos.map(a => ({
+      x: centro.x + radio * Math.cos(a), // Coordenada X en la circunferencia
+      y: centro.y + radio * Math.sin(a)  // Coordenada Y en la circunferencia
+    }));
+
+    // Función para dibujar el reloj (circunferencia, números y puntos)
+    function dibujarReloj() {
+      // Limpiar el canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Dibujar la circunferencia del reloj
+      ctx.beginPath();
+      ctx.arc(centro.x, centro.y, radio, 0, 2 * Math.PI); // Circunferencia completa
+      ctx.stroke();
+
+      // Dibujar los puntos y los números
+      coordenadas.forEach(({ x, y }, i) => {
+        // Dibujar un punto en cada posición del reloj
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Mostrar los números del reloj
+        // Si el índice es 0, mostramos "12"; en caso contrario, mostramos el índice
+        const numero = i === 0 ? 12 : i;
+
+        // Calculamos la posición del número (ligeramente más lejos del centro que los puntos)
+        const etiquetaX = centro.x + (radio + 20) * Math.cos(angulos[i]);
+        const etiquetaY = centro.y + (radio + 20) * Math.sin(angulos[i]);
+
+        // Dibujamos el número con el texto centrado en su posición
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(numero, etiquetaX, etiquetaY);
+      });
+    }
+
+    // Posición actual de la aguja (inicia en la posición del "12")
+    let posicion = 0;
+
+    // Función para mover la aguja del reloj
+    function moverAguja() {
+      // Dibujamos el reloj para actualizar la base (circunferencia, números, puntos)
+      dibujarReloj();
+
+      // Coordenadas de la punta de la aguja (basadas en la posición actual)
+      const { x, y } = coordenadas[posicion];
+
+      // Dibujar la aguja desde el centro del reloj hasta la posición actual
+      ctx.beginPath();
+      ctx.moveTo(centro.x, centro.y); // Punto de inicio (centro)
+      ctx.lineTo(x, y); // Punto final (posición de la aguja)
+      ctx.strokeStyle = "red"; // Color de la aguja
+      ctx.lineWidth = 3; // Grosor de la aguja
+      ctx.stroke();
+
+      // Avanzar a la siguiente posición (en ciclo continuo)
+      posicion = (posicion + 1) % coordenadas.length;
+    }
+
+    // Dibujar el reloj inicialmente y mover la aguja cada segundo
+    dibujarReloj();
+    setInterval(moverAguja, 1000);
+  </script>
+</body>
+</html>

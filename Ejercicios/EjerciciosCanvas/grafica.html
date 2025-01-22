@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfica con Canvas</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="chartCanvas" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('chartCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Datos para la gráfica
+        const data = [30, 70, 45, 85, 60, 10];
+        const labels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Junio', 'Julio'];
+        const barWidth = 50;
+        const barSpacing = 20;
+
+        // Dimensiones del canvas
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        // Configuración de colores
+        const barColor = '#4285F4';
+        const axisColor = '#333';
+        const textColor = '#000';
+
+        // Escalar los datos para que quepan en el canvas
+        const maxDataValue = Math.max(...data);
+        const scaleFactor = (canvasHeight - 50) / maxDataValue;
+
+        // Dibujar ejes
+        ctx.strokeStyle = axisColor;
+        ctx.lineWidth = 2;
+
+        // Eje X
+        ctx.beginPath();
+        ctx.moveTo(50, canvasHeight - 30);
+        ctx.lineTo(canvasWidth - 20, canvasHeight - 30);
+        ctx.stroke();
+
+        // Eje Y
+        ctx.beginPath();
+        ctx.moveTo(50, canvasHeight - 30);
+        ctx.lineTo(50, 20);
+        ctx.stroke();
+
+        // Dibujar las barras
+        data.forEach((value, index) => {
+            const barHeight = value * scaleFactor;
+            const x = 50 + barSpacing + index * (barWidth + barSpacing);
+            const y = canvasHeight - 30 - barHeight;
+
+            // Barra
+            ctx.fillStyle = barColor;
+            ctx.fillRect(x, y, barWidth, barHeight);
+
+            // Etiqueta de la barra
+            ctx.fillStyle = textColor;
+            ctx.font = '14px Arial';
+            ctx.fillText(labels[index], x + barWidth / 4, canvasHeight - 10);
+        });
+
+        // Etiqueta de valores
+        data.forEach((value, index) => {
+            const barHeight = value * scaleFactor;
+            const x = 50 + barSpacing + index * (barWidth + barSpacing);
+            const y = canvasHeight - 30 - barHeight;
+
+            ctx.fillStyle = textColor;
+            ctx.font = '12px Arial';
+            ctx.fillText(value, x + barWidth / 4, y - 5);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla con Paginación</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        #selector-elementos {
+            margin-top: 20px;
+            display: block;
+        }
+
+        .paginador {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .boton-pagina,
+        .boton-flecha {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .boton-pagina:hover,
+        .boton-flecha:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tabla con Paginación</h1>
+    <label for="selector-elementos">Elementos por página:</label>
+    <select id="selector-elementos">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="todos" selected>Mostrar todos</option>
+    </select>
+    <div id="tabla-contenedor"></div>
+    <div class="paginador" id="paginador"></div>
+    <script>
+        // Referencias a los elementos principales
+        const tablaContenedor = document.getElementById("tabla-contenedor");
+        const paginador = document.getElementById("paginador");
+        const selectorElementos = document.getElementById("selector-elementos");
+
+        // Variables globales
+        let datos = [];
+        let paginaActual = 1;
+        let elementosPorPagina = 5; // Valor inicial predeterminado
+
+        // Inicialización al cargar la página
+        window.addEventListener("DOMContentLoaded", () => {
+            const opcionSeleccionada = selectorElementos.querySelector("option[selected]");
+            if (opcionSeleccionada) {
+                selectorElementos.value = opcionSeleccionada.value;
+            }
+            actualizarElementosPorPagina(); // Asegurar que la tabla y el paginador se actualicen correctamente
+        });
+
+        // Obtener datos del API y renderizar tabla y paginador
+        function obtenerDatos() {
+            fetch("https://jsonplaceholder.typicode.com/posts")
+                .then(respuesta => respuesta.json())
+                .then(datosRecibidos => {
+                    datos = datosRecibidos; // Almacenar datos obtenidos
+                    actualizarElementosPorPagina(); // Renderizar tabla y paginador después de cargar los datos
+                })
+                .catch(error => {
+                    tablaContenedor.innerHTML = `<p>Error al obtener los datos: ${error.message}</p>`;
+                });
+        }
+
+        // Renderizar la tabla con los datos paginados
+        function renderizarTabla() {
+            tablaContenedor.innerHTML = ""; // Limpiar contenido previo
+            const tabla = document.createElement("table");
+            const thead = document.createElement("thead");
+            const tbody = document.createElement("tbody");
+
+            // Crear fila de encabezado
+            const filaCabecera = document.createElement("tr");
+            ["ID", "Título", "Contenido"].forEach(encabezado => {
+                const th = document.createElement("th");
+                th.textContent = encabezado;
+                filaCabecera.appendChild(th);
+            });
+            thead.appendChild(filaCabecera);
+
+            // Calcular elementos visibles para la página actual
+            const inicio = (paginaActual - 1) * elementosPorPagina;
+            const fin = elementosPorPagina === datos.length ? datos.length : inicio + elementosPorPagina;
+            const elementosPagina = datos.slice(inicio, fin);
+
+            // Crear filas de datos
+            elementosPagina.forEach(elemento => {
+                const fila = document.createElement("tr");
+                ["id", "title", "body"].forEach(campo => {
+                    const celda = document.createElement("td");
+                    celda.textContent = elemento[campo];
+                    fila.appendChild(celda);
+                });
+                tbody.appendChild(fila);
+            });
+
+            tabla.appendChild(thead);
+            tabla.appendChild(tbody);
+            tablaContenedor.appendChild(tabla);
+        }
+
+        // Renderizar los botones del paginador
+        function renderizarPaginador() {
+            paginador.innerHTML = ""; // Limpiar contenido previo
+            const totalPaginas = Math.ceil(datos.length / elementosPorPagina); // Calcular total de páginas
+
+            // Crear botones de paginación
+            for (let i = 0; i <= totalPaginas + 1; i++) {
+                const boton = document.createElement("button");
+                boton.className = i === 0 || i === totalPaginas + 1 ? "boton-flecha" : "boton-pagina";
+                boton.textContent = i === 0 ? "«" : i === totalPaginas + 1 ? "»" : i;
+                boton.addEventListener("click", () => cambiarPagina(i === 0 ? 1 : i === totalPaginas + 1 ? totalPaginas : i));
+                paginador.appendChild(boton);
+            }
+        }
+
+        // Cambiar de página
+        function cambiarPagina(nuevaPagina) {
+            paginaActual = nuevaPagina;
+            renderizarTabla();
+        }
+
+        // Actualizar número de elementos por página y reiniciar la paginación
+        selectorElementos.addEventListener("change", actualizarElementosPorPagina);
+
+        function actualizarElementosPorPagina() {
+            const valorSeleccionado = selectorElementos.value;
+            elementosPorPagina = valorSeleccionado === "todos" ? datos.length : parseInt(valorSeleccionado);
+            paginaActual = 1; // Reiniciar a la primera página
+            renderizarTabla();
+            renderizarPaginador();
+        }
+
+        // Llamar a la función para cargar los datos al inicio
+        obtenerDatos();
+    </script>
+</body>
+
+</html>

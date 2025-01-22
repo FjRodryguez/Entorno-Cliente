@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Francisco Javier Rodríguez Domínguez</title>
+    <style>
+        body{
+            margin: auto;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        button{
+            align-self: flex-start;
+        }
+        table, tr, th, td{
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        th, td{
+            padding: 20px;
+        }
+        tr:hover{
+            background-color: gray;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <script>
+        let productos = [];
+        let columnas = ['Elemento', 'TimeStamp'];
+        let body = document.body;
+        let titulo = document.createElement('h1');
+        titulo.textContent = "Gestión de Inventario"
+        body.appendChild(titulo);
+        let form = document.createElement('form');
+        form.setAttribute('action', '');
+        body.appendChild(form);
+
+        let label = document.createElement('label');
+        label.getAttribute('for', 'productos')
+        label.textContent = "Productos: "
+        form.appendChild(label);
+
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('name', 'productos');
+        input.setAttribute('id', 'productos');
+        input.setAttribute('placeholder', 'producto1, producto2...');
+        form.appendChild(input);
+
+        let button = document.createElement('button');
+        button.setAttribute('id', 'añadir');
+        button.setAttribute('onclick', 'guardarProductos()');
+        button.textContent = "Añadir productos";
+        body.appendChild(button);
+
+            let radioButtonNombre = document.createElement('input');
+            radioButtonNombre.setAttribute('type', 'radio');
+            radioButtonNombre.setAttribute('name', 'ordenacion');
+            radioButtonNombre.setAttribute('id', 'nombre');
+            radioButtonNombre.setAttribute('onclick', 'ordenarNombre()');
+            form.appendChild(radioButtonNombre);
+            let label1 = document.createElement('label');
+            label1.setAttribute('for', 'ordenacion');
+            label1.textContent = "Ordenar por nombre";
+            form.appendChild(label1);
+
+            let radioButtonFecha = document.createElement('input');
+            radioButtonFecha.setAttribute('type', 'radio');
+            radioButtonFecha.setAttribute('name', 'ordenacion');
+            radioButtonFecha.setAttribute('checked', '');
+            radioButtonFecha.setAttribute('id', 'nombre');
+            radioButtonFecha.setAttribute('onclick', 'ordenarFecha()');
+            form.appendChild(radioButtonFecha);
+            let label2 = document.createElement('label');
+            label2.setAttribute('for', 'ordenacion');
+            label2.textContent = "Ordenar por fecha y hora";
+            form.appendChild(label2);
+
+        let hora = document.createElement('p');
+        hora.setAttribute('id', 'hora');
+        body.appendChild(hora);
+
+        function guardarProductos() {
+            let valoresInput = document.getElementById('productos').value.split(',');
+            let valoresFinales = [];
+            let i = 0;
+            valoresInput.forEach(valor => {
+                valoresFinales[i] = valor.trim();
+                i++;
+            });
+            for (let i = 0; i < valoresFinales.length; i++) {
+                if (valoresFinales[i])
+                    if (valoresFinales[i] != '') {
+                        productoConFecha = [valoresFinales[i], obtenerFechaHora()];
+                        productos.push(productoConFecha);
+                    }
+            }
+            mostrarTabla();
+        }
+
+        let divTabla = document.createElement('div');
+        divTabla.setAttribute('id', 'divTabla');
+        body.appendChild(divTabla);
+        function mostrarTabla() {
+            if (productos.length == 0) {
+                window.alert("No hay productos");
+            } else {
+                document.getElementById('divTabla').innerHTML = '';
+                let tabla = document.createElement('table');
+                divTabla.appendChild(tabla);
+                let tr = document.createElement('tr');
+                tabla.appendChild(tr);
+                columnas.forEach(columna => {
+                    let th = document.createElement('th');
+                    th.textContent = columna;
+                    tr.appendChild(th);
+                });
+                productos.forEach(producto => {
+                    let tr = document.createElement('tr');
+                    tabla.appendChild(tr);
+                    let td1 = document.createElement('td');
+                    td1.textContent = producto[0];
+                    tr.appendChild(td1);
+                    let td2 = document.createElement('td');
+                    td2.textContent = producto[1];
+                    tr.appendChild(td2);
+                });
+            }
+        }
+
+        function obtenerFechaHora() {
+            let date = new Date();
+            let horas = date.getHours();
+            let minutos = date.getMinutes();
+            let segundos = date.getSeconds();
+            return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()} ${horas}:${minutos}:${segundos}`;
+        }
+
+        function mostrarHora() {
+            let date = new Date();
+            let horas = date.getHours();
+            if(horas < 10){
+                horas = `0${horas}`;
+            }
+            let minutos = date.getMinutes();
+            if(minutos < 10){
+                minutos = `0${horas}`;
+            }
+            let segundos = date.getSeconds();
+            if(segundos < 10){
+                segundos = `0${horas}`;
+            }
+            hora.textContent = `Hora actual: ${horas}:${minutos}:${segundos}`;
+        }
+
+        setInterval(mostrarHora, '1000');
+    </script>
+</body>
+
+</html>

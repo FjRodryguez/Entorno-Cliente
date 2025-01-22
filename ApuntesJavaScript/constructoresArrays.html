@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maneras de construir un array</title>
+</head>
+<body>
+    <script>
+        // Literal ([])
+        const arr1 = [1, 2, 3, 4]; // Array con 4 elementos
+        const arr2 = []; // Array vacío
+
+        //Constructor new Array()
+        const arr3 = new Array(4); // Array vacío con longitud 4
+        const arr4 = new Array(1, 2, 3, 4); //Array con elementos 1, 2, 3, 4
+
+        //Array.of()
+        const arr5 = Array.of(4); // Array con el número 4 como único elemento
+        const arr6 = Array.of(1, 2, 3, 4); // Array con 1, 2, 3, 4
+
+        //Array.from()
+        const arr7 = Array.from('1234'); // ['1', '2', '3', '4'] (de una cadena)
+        const arr8 = Array.from([10, 20, 30], x => x / 10); // [1, 2, 3]
+        const arr9 = Array.from({ lenght: 5 }, (_, i) => i + 1); // [1, 2, 3, 4, 5]
+
+        //Spread Operator (...)
+        const arr10 = [...'abc']; // ['a', 'b', 'c'] (de una cadena)
+        const arr11 = [...[1, 2, 3], [4, 5]]; // [1, 2, 3, 4, 5] (combinación)
+
+        //Asignación dinámica
+        const arr12 = [];
+        arr[0] = 1; // Añadir en posición 0
+        arr[1] = 2; // Añadir en posición 1
+
+    </script>
+</body>
+</html>
