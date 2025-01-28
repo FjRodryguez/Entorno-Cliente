@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XmlHttpRequest con XML</title>
+</head>
+
+<body>
+    <script>
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'https://api.ejemplo.com/datos.xml', true);
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let datos = xhr.responseXML;
+                if (datos) {
+                    //Se navega usando Nodos como si fuese un documento html
+                    let raiz = datos.getElementByTagName('raiz')[0];
+                    console.log("Nodo raíz:", raiz.nodeName);
+                } else {
+                    console.log("No se puedo interpretar la respuesta como XML");
+                }
+            }
+        }
+
+        xhr.send();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XmlHttpRequest con JSON</title>
+</head>
+
+<body>
+    <script>
+        let xhr = new XMLHttpRequest();
+        if (xhr.readyState === 0) {
+            console.log("Objeto xhr inicializado");
+        }
+
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+        if (xhr.readyState === 1) {
+            console.log("Conexión establecida")
+        }
+
+        function opcion1(xhr) {
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 2) {
+                    console.log("Recibiendo cabeceras de la respuesta")
+                }
+                if (xhr.readyState === 3) {
+                    console.log("Se está recibiendo el cuerpo de la respuesta")
+                }
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        let datos = JSON.parse(xhr.responseText);
+                        console.log("Datos :", datos);
+                    }
+                } else {
+                    console.log("Error al realizar la solicitud. Código de error: ", xhr.status);
+                }
+            }
+            xhr.send();
+        }
+
+        //Si se pone de está forma no se debe usar un else
+        //Este saltará aunque la petición este bien, mostrando el mensaje de error y luego la petición correctamente
+        //Esto ocurre porque el xhr.readyState primero obtiene el valor 2, después el 3 y por último el 4
+        function opcion2(xhr) {
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let datos = JSON.parse(xhr.responseText);
+                    console.log("Datos :", datos);
+                }
+            }
+            xhr.send();
+        }
+
+        //Esta permite poner un solo if como en la opción 2 y un else como en la opción 1
+        function opcion3(xhr) {
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let datos = JSON.parse(xhr.responseText);
+                    console.log("Datos :", datos);
+                } else if (xhr.status !== 200) {
+                    console.log("Error al realizar la solicitud. Código de error: ", xhr.status);
+                }
+            }
+            xhr.send();
+        }
+
+        //No usar todos a la vez
+        // opcion1(xhr);
+        // opcion2(xhr);
+        // opcion3(xhr);
+    </script>
+</body>
+
+</html>

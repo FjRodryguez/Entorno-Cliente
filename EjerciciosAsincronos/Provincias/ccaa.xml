@@ -1,0 +1,14 @@
+<comunidades_autonomas>
+    <comunidad_autonoma>
+        <codigo>1</codigo>
+        <nombre>Galicia</nombre>
+    </comunidad_autonoma>
+    <comunidad_autonoma>
+        <codigo>2</codigo>
+        <nombre>Extremadura</nombre>
+    </comunidad_autonoma>
+    <comunidad_autonoma>
+        <codigo>3</codigo>
+        <nombre>Comunidad Valenciana</nombre>
+    </comunidad_autonoma>
+</comunidades_autonomas>

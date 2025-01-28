@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uso de DOMParser</title>
+</head>
+
+<body>
+    <script>
+        const xmlString = `
+            <catalog>
+                <book id="1">
+                    <title>Aprendiendo JavaScript</title>
+                    <author>Juan Pérez</author>
+                </book>
+                <book id="2">
+                    <title>Profundizando en XML</title>
+                    <author>María García</author>
+                </book>
+            </catalog>
+            `;
+
+        //Creamos una instancia de DOMParser
+        const parser = new DOMParser();
+
+        //Parseamos la cadena con el formato "aplication/xml" 0 "text/xml"
+        const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+
+        //Sacamos el elemento raíz "catalog"
+        const catalog = xmlDoc.getElementsByTagName('catalog')[0];
+        //Sacamos todos los elementos de tipo "book"
+        const books = xmlDoc.getElementsByTagName('book');
+
+        for (let i = 0; i < books.length; i++) {
+            //Sacamos el título y autor del libro en la posición i
+            const title = books[i].getElementsByTagName('title')[0].textContent;
+            const author = books[i].getElementsByTagName('author')[0].textContent;
+
+            //Mostramos por pantlla el libro con su título y autor
+            console.log(`Libro ${i + 1}: ${title}, de ${author}`);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+[
+    {
+        "codigo": 1,
+        "nombre": "Lugo"
+    },
+    {
+        "codigo": 1,
+        "nombre": "A Coruña"
+    },
+    {
+        "codigo": 1,
+        "nombre": "Ourense"
+    },
+    {
+        "codigo": 1,
+        "nombre": "Pontevedra"
+    },
+    {
+        "codigo": 2,
+        "nombre": "Badajoz"
+    },
+    {
+        "codigo": 2,
+        "nombre": "Cáceres"
+    },
+    {
+        "codigo": 3,
+        "nombre": "Castellón"
+    },
+    {
+        "codigo": 3,
+        "nombre": "Valencia"
+    },
+    {
+        "codigo": 3,
+        "nombre": "Alicante"
+    }
+]

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON y XML dinámicamente</title>
+</head>
+
+<body>
+    <script>
+        function generarYMostrarDatos() {
+            // 1. Generar un objeto JSON dinámicamente
+            const usuario = {
+                nombre: 'Ana',
+                edad: 30,
+                tecnologias: ['JavaScript', 'Node.js', 'React']
+            };
+
+            // Convertimos el objeto en una cadena JSON
+            const usuarioJSON = JSON.stringify(usuario);
+            console.log('Objeto JSON generado:\n', usuarioJSON);
+
+            // 2. Generar un documento XML dinámicamente
+            const docXML = document.implementation.createDocument('', '', null);
+            const raiz = docXML.createElement('usuario');
+
+            // Creamos nodos para nombre y edad
+            const nombreNodo = docXML.createElement('nombre');
+            nombreNodo.textContent = 'Ana';
+    
+            const edadNodo = docXML.createElement('edad');
+            edadNodo.textContent = '30';
+
+            // Creamos un nodo "tecnologias" con varios hijos
+            const tecnologiasNodo = docXML.createElement('tecnologias');
+
+            const tecnologia1 = docXML.createElement('tecnologia');
+            tecnologia1.textContent = 'JavaScript';
+
+            const tecnologia2 = docXML.createElement('tecnologia');
+            tecnologia2.textContent = 'Node.js';
+
+            const tecnologia3 = docXML.createElement('tecnologia');
+            tecnologia3.textContent = 'React';
+
+            // Añadimos las tecnologías al nodo "tecnologias"
+            tecnologiasNodo.appendChild(tecnologia1);
+            tecnologiasNodo.appendChild(tecnologia2);
+            tecnologiasNodo.appendChild(tecnologia3);
+
+            // Unimos nombre, edad y tecnologias a la raíz
+            raiz.appendChild(nombreNodo);
+            raiz.appendChild(edadNodo);
+            raiz.appendChild(tecnologiasNodo);
+
+            // Añadimos la raíz al documento
+            docXML.appendChild(raiz);
+
+            // Serializamos
+            const serializer = new XMLSerializer();
+            const usuarioXML = serializer.serializeToString(docXML);
+            console.log('Documento XML generado:\n', usuarioXML);
+
+            // Envío de datos JSON al servidor,
+            fetch('https://api.ejemplo.com/subir-datos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // En caso de mandar JSON
+                },
+                body: usuarioJSON
+            })
+                .then(res => res.json())
+                .then(resultado => console.log('Respuesta del servidor:', resultado))
+                .catch(error => console.error('Error al enviar datos JSON:', error));
+            // Envío de datos XML al servidor,
+            
+            fetch('https://api.ejemplo.com/subir-xml', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/xml' // En caso de mandar XML
+                },
+                body: usuarioXML
+            })
+                .then(res => res.text())
+                .then(resultado => console.log('Respuesta del servidor al XML:',
+                    resultado))
+                .catch(error => console.error('Error al enviar datos XML:', error));
+        }
+        // Ejecutamos la función
+        generarYMostrarDatos();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Tema 7</title>
+    <style>
+        table,
+        tr,
+        th,
+        td {
+            margin: auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table {
+            width: 70%;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        const contenedor = document.getElementById('container');
+        const arrayCabeceras = ['ID', 'Nombre', 'Categoria'];
+        let productos = [];
+
+        async function obtenerProductos() {
+            try {
+                const response = await fetch('productos.json');
+
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta: ' + response.status);
+                }
+
+                const datos = await response.json();
+                productos = datos;
+                obtenerCategorias();
+            } catch (error) {
+                console.log('Ha ocurrido un error', error);
+            }
+        }
+
+        async function obtenerCategorias() {
+            try {
+                const response = await fetch('categorias.xml');
+
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta: ' + response.status);
+                }
+
+                const xmlText = await response.text(); // Obtener el contenido como texto
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xmlText, "application/xml"); // Parsear como XML
+
+                const categorias = doc.getElementsByTagName('categoria');
+                combinarDatos(productos, categorias);
+            } catch (error) {
+                console.log('Ha ocurrido un error', error);
+            }
+        }
+
+        function combinarDatos(productos, categorias) {
+            productos.forEach(producto => {
+                for (const categoria of categorias) {
+                    if (categoria.getAttribute('id') == producto.categoriaId) {
+                        producto.categoriaId = categoria.getElementsByTagName('nombre')[0].textContent;
+                    }
+                }
+            });
+            renderirzarTabla();
+        }
+
+        function renderirzarTabla() {
+            const table = document.createElement('table');
+            const tableHead = document.createElement('thead');
+            const cabeceras = document.createElement('tr');
+
+            for (let i = 0; i < arrayCabeceras.length; i++) {
+                const th = document.createElement('th');
+                th.textContent = arrayCabeceras[i];
+                cabeceras.appendChild(th);
+            }
+            tableHead.appendChild(cabeceras);
+            table.appendChild(tableHead);
+
+            const tableBody = document.createElement('tbody');
+            productos.forEach(producto => {
+                const tr = document.createElement('tr');
+                Object.keys(producto).forEach(propiedad => {
+                    const td = document.createElement('td');
+                    td.textContent = producto[propiedad];
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            });
+            table.append(tableBody);
+            contenedor.appendChild(table);
+            crearRadiobuttons();
+        }
+
+        function crearRadiobuttons(){
+            for (let i = 0; i < arrayCabeceras.length; i++) {
+                const radioButton = document.createElement('input');
+                radioButton.setAttribute('type', 'radio');
+                radioButton.setAttribute('name', 'ordenacion');
+                radioButton.setAttribute('id', arrayCabeceras[i]);
+                radioButton.addEventListener('click', () => ordenacion(arrayCabeceras[i]));
+                if(i == 0){
+                    radioButton.checked = true;
+                }
+                
+                const label = document.createElement('label');
+                label.textContent = arrayCabeceras[i];
+
+                contenedor.appendChild(radioButton);
+                contenedor.appendChild(label);
+                
+            }
+        }
+
+        function ordenacion(orden){
+            
+        }
+        obtenerProductos();
+
+    </script>
+</body>
+
+</html>
