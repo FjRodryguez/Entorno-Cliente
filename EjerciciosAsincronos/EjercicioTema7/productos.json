@@ -13,5 +13,40 @@
         "id": 3,
         "nombre": "Monitor LED Full HD",
         "categoriaId": 102
+    },
+    {
+        "id": 4,
+        "nombre": "Cascos Bluetooth",
+        "categoriaId": 103
+    },
+    {
+        "id": 5,
+        "nombre": "Webcam HD 1080p",
+        "categoriaId": 104
+    },
+    {
+        "id": 6,
+        "nombre": "Disco Duro Externo 1TB",
+        "categoriaId": 105
+    },
+    {
+        "id": 7,
+        "nombre": "Memoria USB 64GB",
+        "categoriaId": 105
+    },
+    {
+        "id": 8,
+        "nombre": "Impresora Multifunción",
+        "categoriaId": 106
+    },
+    {
+        "id": 9,
+        "nombre": "Silla Ergonómica de Oficina",
+        "categoriaId": 107
+    },
+    {
+        "id": 10,
+        "nombre": "Base Refrigerante para Portátil",
+        "categoriaId": 108
     }
 ]

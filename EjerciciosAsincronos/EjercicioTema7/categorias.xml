@@ -8,4 +8,19 @@
 	<categoria id="103"> 
 		<nombre>Accesorios</nombre> 
 	</categoria> 
+	<categoria id="104"> 
+		<nombre>Almacenamiento</nombre> 
+	</categoria> 
+	<categoria id="105"> 
+		<nombre>Componentes</nombre> 
+	</categoria> 
+	<categoria id="106"> 
+		<nombre>Impresoras</nombre> 
+	</categoria> 
+	<categoria id="107"> 
+		<nombre>Software</nombre> 
+	</categoria> 
+	<categoria id="108"> 
+		<nombre>Redes</nombre> 
+	</categoria> 
 </categorias>
