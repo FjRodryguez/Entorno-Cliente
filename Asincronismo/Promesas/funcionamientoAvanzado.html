@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionamiento avanzado de las Promesas</title>
+</head>
+<body>
+    <script>
+        function validarToken(){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const tokenValido = Math.random() > 0.7; //70% de éxito
+                    if(tokenValido){
+                        resolve("Token válido");
+                    }else{
+                        reject("Token inválido");
+                    }
+                }, 800);
+            });
+        }
+
+        function solicitarDatosPrivados(){
+            return new Promise((resolve, reject)=> {
+                setTimeout(() => {
+                    resolve({informacion: "Datos privados del usuario."});
+                }, 1200);
+            });
+        }
+
+        function procesarDatos(){
+            return new Promise((resolve, reject) => {
+                setTimeout(()=>{
+                    const procesoExitoso = Math.random() > 0.5; //50% de éxito
+                    if(procesoExitoso){
+                        resolve("Datos procesados con éxito: " + JSON.stringify(datos));
+                    }else{
+                        reject("Hubo un problema al procesar los datos");
+                    }
+                }, 1000);
+            });
+        }
+
+        validarToken()
+        .then((mensajeToken) => {
+            console.log(mensajeToken);
+            return solicitarDatosPrivados();
+        })
+        .then((datos))
+    </script>
+</body>
+</html>

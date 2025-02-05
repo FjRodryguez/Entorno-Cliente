@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionamiento básico de las Promesas</title>
+</head>
+
+<body>
+    <script>
+        function simularOperacionAsincrona() {
+            //Instanciamos la promesa
+            return new Promise((resolve, reject) => {
+                console.log("Iniciando operación asíncrona");
+                //Simulamos operación
+                setTimeout(() => {
+                    const exito = Math.random() > 0.5; //50% de cada resultado
+                    if (exito) {
+                        //Si salió bien se llama a resove y pasa su estado a fulfilled
+                        resolve("Operación resuelta con éxito");
+                    } else {
+                        //Si salió mal se llama a reject y pasa su estado a rejected
+                        reject("Opreación fallida");
+                    }
+                }, 2000);//2 segundos de retardo
+
+            });
+        }
+
+        simularOperacionAsincrona()
+            //Si la operación ha ido bien
+            .then((mensaje) => {
+                console.log("Mensaje de éxito (estado Fulfilled):", mensaje);
+            })
+            //Si la operación ha ido mal
+            .catch((error) => {
+                console.log("Mensaje de error (estado Rejected):", error);
+            })
+            //Independientemente de como haya ido se ejecuta al final
+            .finally(() => {
+                console.log("Fin de la operación asíncrona")
+            });
+        //Una vez una promesa cambia de estado a fulfilled o rejected se considerá que esta settled
+    </script>
+</body>
+
+</html>
