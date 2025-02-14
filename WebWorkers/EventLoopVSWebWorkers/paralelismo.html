@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paralelismo</title>
+</head>
+<body>
+    <h2>Comunicación básica con un Web Worker</h2>
+    <button id="btnEnviar">Enviar Mensaje al Worker</button>
+    <div id="respuesta"></div>
+    <script>
+        //1. Crear la instancia de Worker
+        const worker = new Worker("workerBasico.js");
+        const boton = document.getElementById("btnEnviar");
+        const respuestaDiv = document.getElementById("respuesta");
+
+        //2. Evento para enviar mensaje al Worker
+        boton.addEventListener("click", () => {
+            worker.postMessage("Hola Worker!");
+        });
+
+        //3. Escuchar respuestas del Worker
+        worker.onmessage = (event) => {
+            respuestaDiv.textContent = `Respuesta del Worker: ${event.data}`;
+        };
+    </script>
+</body>
+</html>

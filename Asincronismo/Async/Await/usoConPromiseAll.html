@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uso de Promise.all</title>
+</head>
+
+<body>
+    <script>
+        //Obtenemos la información del curso mediante una promesa
+        function obtenerInfoCurso(idCurso) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (idCurso > 0) {
+                        resolve({ id: idCurso, titulo: "Curso de JavaScript Avanzado" });
+                    } else {
+                        reject(new Error("ID de curso inválido"));
+                    }
+                }, 1000);
+            });
+        }
+
+        //Obtenemos los alumnos mediante una promesa
+        function obtenerAlumnosCurso(idCurso) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (idCurso > 0) {
+                        resolve(["Ana", "Luis", "Marta", "Pablo"]);
+                    } else {
+                        reject(new Error("No se puedieron obtener alumnos para este curso"));
+                    }
+                }, 1500);
+            });
+        }
+
+        //Cargamos los datos del curso con su información y sus alumnos
+        //Con una función asíncrona
+        async function cargarDatosCurso(idCurso) {
+            try {
+                console.log("Iniciando carga de datos del curso...");
+
+                //Paramos la ejecución hasta que las dos promesas estén resueltas
+                //En caso de que alguna falle vamos directamente al catch
+                const [curso, alumnos] = await Promise.all([
+                    obtenerInfoCurso(idCurso),
+                    obtenerAlumnosCurso(idCurso)
+                ]);
+
+                //Mostramos los datos obtenidos
+                console.log("Información curso:", curso);
+                console.log("Listado de alumnos:", alumnos);
+
+                console.log("Datos del curso cargados con éxito");
+            } catch (error) {
+                //Si algo falla lo mostramos por pantalla
+                console.error("Error al cargar los datos del curso:", error)
+            }
+        }
+
+        cargarDatosCurso(3);
+
+        cargarDatosCurso(-1);
+    </script>
+</body>
+
+</html>

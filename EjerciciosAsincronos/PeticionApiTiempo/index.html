@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petición a API OpenWeather</title>
+</head>
+
+<body>
+    <h1>Introduce una ciudad</h1>
+    <form action="">
+        <label for="ciudad">Ciudad</label>
+        <input type="text" name="ciudad" id="ciudad">
+        <input type="button" id="enviarDatos" value="Enviar">
+    </form>
+    <div id="container">
+    </div>
+    <script>
+        const claveApi = "8dcc35d09acfa33bac870b7cf523081a";
+        const container = document.getElementById("container");
+        async function obtenerDatos() {
+            const ciudad = document.getElementById("ciudad").value;
+            try {
+                const datos = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${claveApi}&units=metric&lang=es`);
+                const { name, main, weather, wind } = await datos.json();
+
+                container.innerHTML = "";
+                crearElementos("h3", `Tiempo en ${name}`);
+
+                const arrayDatos = {
+                    "Temperatura": `${main.temp} °C`,
+                    "Humedad": `${main.humidity} %`,
+                    "Descripción": `${weather[0].description}`,
+                    "Velocidad del viento": `${wind.speed} m/s`
+                };
+
+                for (const [clave, valor] of Object.entries(arrayDatos)) {
+                    crearElementos("p", `${clave}: ${valor}`);
+                }
+            } catch (error) {
+                console.error("Ha ocurrido un error:", error);
+            }
+        }
+
+        function crearElementos(tipo, texto) {
+            const elemento = document.createElement(tipo);
+            elemento.textContent = texto;
+            container.appendChild(elemento);
+        }
+
+        document.getElementById("enviarDatos").addEventListener("click", () => obtenerDatos());
+    </script>
+</body>
+
+</html>

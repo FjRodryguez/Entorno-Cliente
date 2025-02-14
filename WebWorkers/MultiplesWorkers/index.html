@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manejo de múltiples workers</title>
+</head>
+<body>
+    <h1>Manejo de múltiples workers</h1>
+    <button id="boton">Iniciar workers</button>
+    <div id="container"></div>
+    <script>
+        const container = document.getElementById("container");
+
+        const worker = new Worker("worker1.js");
+
+        worker.onmessage = event => {
+            mensaje(event.data);
+        }
+
+        worker.onerror = event => {
+            mensaje(event.message);
+        }
+
+        document.getElementById("boton").addEventListener("click", () => {
+            mensaje("Cadena iniciada...");
+            worker.postMessage("Iniciar cadena");
+        });
+
+        function mensaje(mensaje){
+            const p = document.createElement("p");
+            p.textContent = mensaje;
+            container.appendChild(p);
+        }
+    </script>
+</body>
+</html>

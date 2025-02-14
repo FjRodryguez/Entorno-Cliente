@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ejemplo Conjunto 2 - Procesamiento de Imagen</title>
+    <style>
+        #imagenPreview {
+            max-width: 300px;
+            margin: 10px 0;
+        }
+
+        #log {
+            background: #f0f0f0;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Procesamiento de Imagen con Web Worker</h2>
+    <input type="file" id="inputFile" accept="image/*" />
+    <button id="btnProcesar">Procesar Imagen</button>
+    <div>
+        <img id="imagenPreview" src="" alt="Vista previa" />
+    </div>
+    <div id="log"></div>
+    <script>
+        const inputFile = document.getElementById('inputFile');
+        const btnProcesar = document.getElementById('btnProcesar');
+        const imagenPreview = document.getElementById('imagenPreview');
+        const logDiv = document.getElementById('log');
+        let imagenSeleccionada = null;
+        const workerImg = new Worker('workerImagen.js');
+        // Mostrar la imagen seleccionada en pantalla
+        inputFile.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagenPreview.src = e.target.result;
+                imagenSeleccionada = e.target.result; // Base64 de la imagen
+            };
+            reader.readAsDataURL(file);
+        });
+        // Procesar imagen en el Worker
+        btnProcesar.addEventListener('click', () => {
+            if (!imagenSeleccionada) {
+                alert('Selecciona primero una imagen');
+                return;
+            }
+            log('Enviando imagen al Worker para procesar...');
+            // Enviamos la imagen codificada en Base64 al Worker
+            workerImg.postMessage(imagenSeleccionada);
+        });
+        // Respuesta del Worker
+        workerImg.onmessage = (event) => {
+            // Recibimos la imagen procesada o un mensaje de estado
+            if (event.data.tipo === 'log') {
+                log(event.data.mensaje);
+            } else if (event.data.tipo === 'resultado') {
+                log('Imagen procesada con éxito. Puedes visualizar el resultado en consola o aplicarlo a un canvas.');
+                console.log(event.data.data);
+            }
+        };
+        // Ejemplo de asincronía adicional: una petición fetch que ocurre en el hilo principal
+        // (Se ejecuta en paralelo a las operaciones del Worker)
+        fetch('https://jsonplaceholder.typicode.com/posts/1')
+            .then(response => response.json())
+            .then(data => {
+                log(`Petición fetch completada: Título del post: "${data.title}"`);
+            })
+            .catch(error => {
+                log(`Error en fetch: ${error}`);
+            });
+        // Función para registrar mensajes en pantalla
+        function log(mensaje) {
+            logDiv.innerHTML += `<p>${mensaje}</p>`;
+        }
+    </script>
+</body>
+
+</html>

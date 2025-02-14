@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deferencia entre async/await con promise</title>
+</head>
+
+<body>
+    <script>
+        function obtenerDatosPromesa() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const datos = { usuario: "Carlos", edad: 25 };
+                    resolve(datos);
+                }, 1000);
+            });
+        }
+
+        obtenerDatosPromesa()
+            .then(resultado => {
+                console.log("Versión con Promesas - Datos recibidos:", resultado);
+            })
+            .catch(error => {
+                console.error("Versión con Promesas - Error:", error);
+            })
+
+        function obtenerDatosAsyncAwait() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const datos = { usuario: "Carlos", edad: 25 };
+                    resolve(datos);
+                }, 1000);
+            });
+        }
+
+        async function mostrarDatos() {
+            try {
+                const resultado = await obtenerDatosAsyncAwait(); // El await para la ejecución de la función hasta que se resulva la promesa
+                console.log("Versión async/await - Datos recibidos:", resultado);
+            } catch (error) { // Si la promesa devuelve un reject, este se recibirá en el catch
+                console.error("Versión async/await - Error:", error);
+            }
+        }
+
+        mostrarDatos();
+    </script>
+</body>
+
+</html>

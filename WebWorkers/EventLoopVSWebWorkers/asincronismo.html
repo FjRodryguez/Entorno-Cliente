@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asincronismo</title>
+</head>
+<body>
+    <h2>Ejemplo de Asincronía con Event Loop</h2>
+    <button id="btnIniciar">Iniciar Tareas</button>
+    <div id="output"></div>
+    <script>
+        const boton = document.getElementById("btnIniciar");
+        const salida = document.getElementById("output");
+
+        boton.addEventListener("click", () => {
+            salida.innerHTML = "";
+            salida.innerHTML += "<p>Inicio de la operación (hilo prinipal)</p>";
+
+            //Tarea asíncrona: se ejecutará después de 2 segundos
+            setTimeout(() => {
+                salida.innerHTML += "<p>Tarea asíncrona completada tras 2 segundos</p>";
+            }, 2000);
+
+            //Tarea síncrona inmediata        
+            salida.innerHTML += "<p>Fin del clic (hilo principal)</p>";
+        });
+
+    </script>
+</body>
+</html>

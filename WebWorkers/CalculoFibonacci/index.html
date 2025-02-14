@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci con Worker</title>
+</head>
+
+<body>
+    <h2>Cálculo de Fibonacci usando Web Worker</h2>
+    <label for="numeroFibo">Número de Fibonacci a calcular:</label>
+    <input type="number" id="numeroFibo" value="40" />
+    <button id="btnCalcular">Calcular</button>
+    <div id="resultado"></div>
+    <div id="estado"></div>
+    <script>
+        const input = document.getElementById('numeroFibo');
+        const boton = document.getElementById('btnCalcular');
+        const resultado = document.getElementById('resultado');
+        const estado = document.getElementById('estado');
+        const worker = new Worker("worker.js");
+
+        //Escuchar mensajes del Worker (resultao)
+        worker.onmessage = event => {
+            resultado.textContent = "Resultado: " + event.data;
+            estado.textContent = "Cálculo finalizado";
+        }
+
+        //Manejo de posibles errores dentro del Worker
+        worker.onerror = event => {
+            estado.textContent = "Error en Worker: " + event.message;
+        }
+
+        //Evento del botón para enviar petición del cálculo
+        boton.addEventListener("click", () =>{
+            estado.textContent = "Calculando...";
+            resultado.textContent = "";
+            const valor = parseInt(input.value, 10);
+            worker.postMessage(valor);
+        })
+    </script>
+</body>
+
+</html>
